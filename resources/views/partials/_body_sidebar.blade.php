@@ -2,16 +2,16 @@
     $url = '';
 
     $MyNavBar = \Menu::make('MenuList', function ($menu) use($url){
-        
-        $menu->add('<span>'. __('message.new_booking') .'</span>', ['route' => 'dispatch.create'])
-                ->prepend('<i class="fas fa-plus-square"></i>') 
-                ->data('permission', 'dispatch add');
+
+        // $menu->add('<span>'. __('message.new_booking') .'</span>', ['route' => 'dispatch.create'])
+        //         ->prepend('<i class="fas fa-plus-square"></i>')
+        //         ->data('permission', 'dispatch add');
 
         //Admin Dashboard
         $menu->add('<span>'.__('message.dashboard').'</span>', ['route' => 'home'])
-            ->prepend('<i class="fas fa-home"></i>')            
-            ->link->attr(['class' => '']); 
-        
+            ->prepend('<i class="fas fa-home"></i>')
+            ->link->attr(['class' => '']);
+
         $menu->add('<span>'.__('message.rider').'</span>', ['class' => ''])
             ->prepend('<i class="fas fa-user"></i>')
             ->nickname('rider')
@@ -28,7 +28,7 @@
                 ->data('permission', [ 'rider add', 'rider edit'])
                 ->prepend('<i class="fas fa-plus-square"></i>')
                 ->link->attr(['class' => '']);
-        
+
         $menu->add('<span>'.__('message.region').'</span>', ['class' => ''])
             ->prepend('<i class="fas fa-globe"></i>')
             ->nickname('region')
@@ -45,7 +45,7 @@
                 ->data('permission', [ 'region add', 'region edit'])
                 ->prepend('<i class="fas fa-plus-square"></i>')
                 ->link->attr(['class' => '']);
-        
+
         $menu->add('<span>'.__('message.service').'</span>', [ 'class' => '', 'route' => 'service.index'])
             ->prepend('<i class="fas fa-taxi"></i>')
             ->nickname('service')
@@ -62,14 +62,14 @@
                 ->data('permission', [ 'service add', 'service edit'])
                 ->prepend('<i class="fas fa-plus-square"></i>')
                 ->link->attr(['class' => '']);
-        
+
         $menu->add('<span>'.__('message.driver').'</span>', ['class' => ''])
             ->prepend('<i class="fas fa-id-card"></i>')
             ->nickname('driver')
             ->data('permission', 'driver list')
             ->link->attr(['class' => ''])
             ->href('#driver');
-            
+
             $menu->driver->add('<span>'.__('message.list_form_title',['form' => __('message.driver')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'driver.index'])
                 ->data('permission', 'driver list')
                 ->prepend('<i class="fas fa-list"></i>')
@@ -84,7 +84,7 @@
                 ->data('permission', [ 'driver add', 'driver edit'])
                 ->prepend('<i class="fas fa-plus-square"></i>')
                 ->link->attr(['class' => '']);
-            
+
             $menu->driver->add('<span>'.__('message.manage_driver_document').'</span>', ['class' => ( request()->is('driverdocument') || request()->is('driverdocument/*') ) ? 'sidebar-layout active' : 'sidebar-layout', 'route' => 'driverdocument.index'])
                 ->data('permission', ['driverdocument list'])
                 ->prepend('<i class="fas fa-plus-square"></i>')
@@ -101,7 +101,7 @@
             ->data('permission', 'document list')
             ->link->attr(['class' => ''])
             ->href('#document');
-            
+
             $menu->document->add('<span>'.__('message.list_form_title',['form' => __('message.document')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'document.index'])
                 ->data('permission', 'document list')
                 ->prepend('<i class="fas fa-list"></i>')
@@ -112,79 +112,79 @@
                 ->prepend('<i class="fas fa-plus-square"></i>')
                 ->link->attr(['class' => '']);
 
-        $menu->add('<span>'.__('message.coupon').'</span>', [ 'class' => ''])
-            ->prepend('<i class="fas fa-gift"></i>')
-            ->nickname('coupon')
-            ->data('permission', 'coupon list')
-            ->link->attr(['class' => ''])
-            ->href('#coupon');
-            
-            $menu->coupon->add('<span>'.__('message.list_form_title',['form' => __('message.coupon')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'coupon.index'])
-                ->data('permission', 'coupon list')
-                ->prepend('<i class="fas fa-list"></i>')
-                ->link->attr(['class' => '']);
+        // $menu->add('<span>'.__('message.coupon').'</span>', [ 'class' => ''])
+        //     ->prepend('<i class="fas fa-gift"></i>')
+        //     ->nickname('coupon')
+        //     ->data('permission', 'coupon list')
+        //     ->link->attr(['class' => ''])
+        //     ->href('#coupon');
 
-            $menu->coupon->add('<span>'.__('message.add_form_title',['form' => __('message.coupon')]).'</span>', ['class' => request()->is('coupon/*/edit') ? 'sidebar-layout active' : 'sidebar-layout', 'route' => 'coupon.create'])
-                ->data('permission', [ 'coupon add', 'coupon edit'])
-                ->prepend('<i class="fas fa-plus-square"></i>')
-                ->link->attr(['class' => '']);
+        //     $menu->coupon->add('<span>'.__('message.list_form_title',['form' => __('message.coupon')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'coupon.index'])
+        //         ->data('permission', 'coupon list')
+        //         ->prepend('<i class="fas fa-list"></i>')
+        //         ->link->attr(['class' => '']);
 
-        $menu->add('<span>'.__('message.riderequest').'</span>', [ 'class' => '' ])
-            ->prepend('<i class="fas fa-car-side"></i>')
-            ->nickname('riderequest')
-            ->data('permission', 'riderequest list')
-            ->link->attr(['class' => ''])
-            ->href('#riderequest');
+        //     $menu->coupon->add('<span>'.__('message.add_form_title',['form' => __('message.coupon')]).'</span>', ['class' => request()->is('coupon/*/edit') ? 'sidebar-layout active' : 'sidebar-layout', 'route' => 'coupon.create'])
+        //         ->data('permission', [ 'coupon add', 'coupon edit'])
+        //         ->prepend('<i class="fas fa-plus-square"></i>')
+        //         ->link->attr(['class' => '']);
 
-            $menu->riderequest->add('<span>'.__('message.list_form_title',['form' => __('message.riderequest')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'riderequest.index'])
-                ->data('permission', 'riderequest list')
-                ->prepend('<i class="fas fa-list"></i>')
-                ->link->attr(['class' => '']);
+        // $menu->add('<span>'.__('message.riderequest').'</span>', [ 'class' => '' ])
+        //     ->prepend('<i class="fas fa-car-side"></i>')
+        //     ->nickname('riderequest')
+        //     ->data('permission', 'riderequest list')
+        //     ->link->attr(['class' => ''])
+        //     ->href('#riderequest');
+
+        //     $menu->riderequest->add('<span>'.__('message.list_form_title',['form' => __('message.riderequest')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'riderequest.index'])
+        //         ->data('permission', 'riderequest list')
+        //         ->prepend('<i class="fas fa-list"></i>')
+        //         ->link->attr(['class' => '']);
 
         $menu->add('<span>'.__('message.complaint').'</span>', [ 'class' => '', 'route' => 'complaint.index'])
             ->prepend('<i class="fas fa-file-alt"></i>')
             ->data('permission', 'complaint list')
             ->link->attr(['class' => '']);
-        
-        $menu->add('<span>'.__('message.withdrawrequest').'</span>', [ 'class' => '', 'route' => 'withdrawrequest.index'])
-            ->prepend('<i class="fas fa-money-check"></i>')
-            ->data('permission', 'withdrawrequest list')
-            ->link->attr(['class' => '']);
 
-        $menu->add('<span>'.__('message.account_setting').'</span>', ['class' => ''])
-            ->prepend('<i class="fas fa-users-cog"></i>')
-            ->nickname('account_setting')
-            ->data('permission', ['role list','permission list'])
-            ->link->attr(["class" => ""])
-            ->href('#account_setting');
+        // $menu->add('<span>'.__('message.withdrawrequest').'</span>', [ 'class' => '', 'route' => 'withdrawrequest.index'])
+        //     ->prepend('<i class="fas fa-money-check"></i>')
+        //     ->data('permission', 'withdrawrequest list')
+        //     ->link->attr(['class' => '']);
 
-            $menu->account_setting->add('<span>'.__('message.list_form_title',['form' => __('message.role')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'role.index'])
-                ->data('permission', 'role list')
-                ->prepend('<i class="fas fa-list"></i>')
-                ->link->attr(['class' => '']);
+        // $menu->add('<span>'.__('message.account_setting').'</span>', ['class' => ''])
+        //     ->prepend('<i class="fas fa-users-cog"></i>')
+        //     ->nickname('account_setting')
+        //     ->data('permission', ['role list','permission list'])
+        //     ->link->attr(["class" => ""])
+        //     ->href('#account_setting');
 
-            $menu->account_setting->add('<span>'.__('message.list_form_title',['form' => __('message.permission')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'permission.index'])
-                ->data('permission', 'permission list')
-                ->prepend('<i class="fas fa-list"></i>')
-                ->link->attr(['class' => '']);
-        
-        $menu->add('<span>'.__('message.additionalfees').'</span>', [ 'class' => ''])
-            ->prepend('<i class="fas fa-address-book"></i>')
-            ->nickname('additionalfees')
-            ->data('permission', 'additionalfees list')
-            ->link->attr(['class' => ''])
-            ->href('#additionalfees');
+        //     $menu->account_setting->add('<span>'.__('message.list_form_title',['form' => __('message.role')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'role.index'])
+        //         ->data('permission', 'role list')
+        //         ->prepend('<i class="fas fa-list"></i>')
+        //         ->link->attr(['class' => '']);
 
-            $menu->additionalfees->add('<span>'.__('message.list_form_title',['form' => __('message.additionalfees')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'additionalfees.index'])
-                ->data('permission', 'additionalfees list')
-                ->prepend('<i class="fas fa-list"></i>')
-                ->link->attr(['class' => '']);
+        //     $menu->account_setting->add('<span>'.__('message.list_form_title',['form' => __('message.permission')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'permission.index'])
+        //         ->data('permission', 'permission list')
+        //         ->prepend('<i class="fas fa-list"></i>')
+        //         ->link->attr(['class' => '']);
 
-            $menu->additionalfees->add('<span>'.__('message.add_form_title',['form' => __('message.additionalfees')]).'</span>', ['class' => request()->is('additionalfees/*/edit') ? 'sidebar-layout active' : 'sidebar-layout','route' => 'additionalfees.create'])
-                ->data('permission', [ 'additionalfees add', 'additionalfees edit'])
-                ->prepend('<i class="fas fa-plus-square"></i>')
-                ->link->attr(['class' => '']);
-        
+        // $menu->add('<span>'.__('message.additionalfees').'</span>', [ 'class' => ''])
+        //     ->prepend('<i class="fas fa-address-book"></i>')
+        //     ->nickname('additionalfees')
+        //     ->data('permission', 'additionalfees list')
+        //     ->link->attr(['class' => ''])
+        //     ->href('#additionalfees');
+
+        //     $menu->additionalfees->add('<span>'.__('message.list_form_title',['form' => __('message.additionalfees')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'additionalfees.index'])
+        //         ->data('permission', 'additionalfees list')
+        //         ->prepend('<i class="fas fa-list"></i>')
+        //         ->link->attr(['class' => '']);
+
+        //     $menu->additionalfees->add('<span>'.__('message.add_form_title',['form' => __('message.additionalfees')]).'</span>', ['class' => request()->is('additionalfees/*/edit') ? 'sidebar-layout active' : 'sidebar-layout','route' => 'additionalfees.create'])
+        //         ->data('permission', [ 'additionalfees add', 'additionalfees edit'])
+        //         ->prepend('<i class="fas fa-plus-square"></i>')
+        //         ->link->attr(['class' => '']);
+
         $menu->add('<span>'.__('message.sos').'</span>', [ 'class' => ''])
             ->prepend('<i class="fas fa-address-book"></i>')
             ->nickname('sos')
@@ -212,22 +212,22 @@
                     ->data('permission', 'terms condition')
                     ->prepend('<i class="fas fa-file-contract"></i>')
                     ->link->attr(['class' => '']);
-                
+
                 $menu->pages->add('<span>'.__('message.privacy_policy').'</span>', ['class' => 'sidebar-layout' ,'route' => 'privacy-policy'])
                     ->data('permission', 'privacy policy')
                     ->prepend('<i class="fas fa-user-shield"></i>')
-                    ->link->attr(['class' => '']);       
-        
+                    ->link->attr(['class' => '']);
+
         $menu->add('<span>'.__('message.driver_location').'</span>', ['route' => 'map'])
                 ->prepend('<i class="fas fa-map"></i>')
                 ->nickname('map')
                 ->data('permission', 'driver location');
-        
-        $menu->add('<span>'.__('message.setting').'</span>', ['route' => 'setting.index'])
-                ->prepend('<i class="fas fa-cog"></i>')
-                ->nickname('setting')
-                ->data('permission', 'system setting');
-        
+
+        // $menu->add('<span>'.__('message.setting').'</span>', ['route' => 'setting.index'])
+        //         ->prepend('<i class="fas fa-cog"></i>')
+        //         ->nickname('setting')
+        //         ->data('permission', 'system setting');
+
 
         })->filter(function ($item) {
             return checkMenuRoleAndPermission($item);
@@ -237,8 +237,8 @@
 <div class="mm-sidebar sidebar-default">
     <div class="mm-sidebar-logo d-flex align-items-center justify-content-between">
         <a href="{{ route('home') }}" class="header-logo">
-            <img src="{{ getSingleMedia(appSettingData('get'),'site_logo',null) }}" class="img-fluid mode light-img rounded-normal light-logo site_logo_preview" alt="logo">
-            <img src="{{ getSingleMedia(appSettingData('get'),'site_dark_logo',null) }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
+            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal light-logo site_logo_preview" alt="logo">
+            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
         </a>
         <div class="side-menu-bt-sidebar">
             <i class="fas fa-bars wrapper-menu"></i>
@@ -248,7 +248,7 @@
     <div class="data-scrollbar" data-scroll="1">
         <nav class="mm-sidebar-menu">
             <ul id="mm-sidebar-toggle" class="side-menu">
-                @include(config('laravel-menu.views.bootstrap-items'), ['items' => $MyNavBar->roots()])       
+                @include(config('laravel-menu.views.bootstrap-items'), ['items' => $MyNavBar->roots()])
             </ul>
         </nav>
         <div class="pt-5 pb-2"></div>

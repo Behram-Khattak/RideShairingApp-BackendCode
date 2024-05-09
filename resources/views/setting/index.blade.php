@@ -31,18 +31,18 @@
                                     <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=mobile-config" data-target=".paste_here" class="nav-link {{$page=='mobile-config'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.mobile_config') }}</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=wallet-setting" data-target=".paste_here" class="nav-link {{$page=='wallet-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.wallet_setting') }}</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> --}}
+                                    {{-- <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=ride-setting" data-target=".paste_here" class="nav-link {{$page=='ride-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.ride_setting') }}</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=mail-setting" data-target=".paste_here" class="nav-link {{$page=='mail-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.mail_settings') }}</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> --}}
+                                    {{-- <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=language-setting" data-target=".paste_here" class="nav-link {{$page=='language-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.language_settings') }}</a>
-                                    </li>
+                                    </li> --}}
                                     {{-- <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=notification-setting" data-target=".paste_here" class="nav-link {{$page=='notification-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.notification_settings') }}</a>
                                     </li> --}}
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    
+
     @section('bottom_script')
         <script>
             $(document).ready(function(event)
@@ -69,7 +69,7 @@
                 loadurl = "{{route('layout_page')}}?page={{$page}}";
 
                 targ = $this.attr('data-target');
-                
+
                 id = this.id || '';
 
                 $.post(loadurl,{ '_token': $('meta[name=csrf-token]').attr('content') } ,function(data) {

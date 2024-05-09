@@ -1,23 +1,23 @@
 <div class="mm-top-navbar">
     <div class="mm-navbar-custom">
         <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <div class="mm-navbar-logo d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-between">
                 <i class="fas fa-bars wrapper-menu"></i>
                 <a href="{{ asset('/') }}" class="header-logo">
-                    <img src="{{ getSingleMedia(appSettingData('get'),'site_logo',null) }}" class="img-fluid mode light-img rounded-normal site_logo_preview " alt="logo">
-                    <img src="{{ getSingleMedia(appSettingData('get'),'site_dark_logo',null) }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
-                    <!-- <h4 class="ml-1"><b>{{ env('APP_NAME') }}</b></h4> -->
+                    {{-- <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal site_logo_preview " alt="logo">
+                    <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo"> --}}
+                    <h4 class="ml-1"><b>{{ env('APP_NAME') }}</b></h4>
                 </a>
             </div>
             <div class="mm-search-bar device-search m-auto">
-                @if( !env('MQTT_UNIQUE_TOPIC_NAME') )
+                {{-- @if( !env('MQTT_UNIQUE_TOPIC_NAME') )
                     <h5 class="text-danger"><i class="fas fa-exclamation-circle"></i> Notes: Set <b>MQTT_UNIQUE_TOPIC_NAME</b> in .env file and also set in application lib/utils/Constants.dart.</h5>
                     <h5 class="text-danger">Also update that in your both application</h5>
-                @endif
-                <!-- <form action="#" class="searchbox">
+                @endif --}}
+                {{-- <form action="#" class="searchbox">
                     <a class="search-link" href="#"><i class="ri-search-line"></i></a>
                     <input type="text" class="text search-input" placeholder="Search here...">
-                </form> -->
+                </form> --}}
             </div>
             <div class="d-flex align-items-center">
                 <div class="change-mode">
@@ -44,11 +44,11 @@
                     <i class="ri-menu-3-line"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-list align-items-center">                        
+                    <ul class="navbar-nav ml-auto navbar-list align-items-center">
                         <li class="nav-item nav-icon dropdown">
                             <a href="#" class="search-toggle dropdown-toggle notification_list" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 <svg class="svg-icon text-primary" id="mm-bell-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                                <span class="bg-primary "></span>                               
+                                <span class="bg-primary "></span>
                                 <span class="badge badge-pill badge-primary badge-up notify_count count-mail d-none"></span>
                                 <span class="bg-primary dots d-none"></span>
                             </a>
@@ -60,7 +60,7 @@
                             </div>
                         </li>
 
-                        <li class="nav-item nav-icon dropdown">
+                        {{-- <li class="nav-item nav-icon dropdown">
                             <a href="#" class="search-toggle dropdown-toggle" id="languageDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @php
                                     $selected_lang_flag = file_exists(public_path('/images/flag/' .app()->getLocale() . '.png')) ? asset('/images/flag/' . app()->getLocale() . '.png') : asset('/images/lang_flag.png');
@@ -95,14 +95,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item nav-icon dropdown full-screen">
+                        {{-- <li class="nav-item nav-icon dropdown full-screen">
                             <a href="#" class="nav-item nav-icon dropdown" id="btnFullscreen">
                                 <i class="max"><svg class="svg-icon  text-primary" id="d-3-max" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></i>
                                 <i class="min d-none"><svg class="svg-icon  text-primary" id="d-3-min" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg></i>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item nav-icon dropdown">
                             <a href="#" class="nav-item nav-icon dropdown-toggle pr-0 search-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 <img src="{{ getSingleMedia( auth()->user(), 'profile_image', null) }}" class="img-fluid avatar-rounded" alt="user">
@@ -121,7 +121,7 @@
                                     </svg>
                                     <a href="{{ route('setting.index') }}">{{ __('message.setting') }}</a>
                                 </li>
-                                
+
                                 <li class="dropdown-item d-flex border-top">
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
