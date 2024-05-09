@@ -14,7 +14,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -118,7 +118,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -158,7 +158,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <div class="card rounded-pill card-block card-stretch card-height">
+                        <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="mm-cart-image text-primary">
@@ -244,7 +244,7 @@
             </div> --}}
 
             <div class="col-lg-12">
-                <div class="card rounded-pill card-block card-stretch card-height">
+                <div class="card card-block card-stretch card-height">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title px-4">
                             <h4 class="card-title">{{ __('message.income') }}</h4>

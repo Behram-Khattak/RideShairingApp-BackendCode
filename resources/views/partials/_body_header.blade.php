@@ -6,7 +6,7 @@
                 <a href="{{ asset('/') }}" class="header-logo">
                     {{-- <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal site_logo_preview " alt="logo">
                     <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo"> --}}
-                    <h4 class="ml-1"><b>{{ env('APP_NAME') }}</b></h4>
+                    <h4 class="ml-1 dashboard-navbar-title"><b>{{ env('APP_NAME') }}</b></h4>
                 </a>
             </div>
             <div class="mm-search-bar device-search m-auto">
@@ -105,7 +105,7 @@
                         </li> --}}
                         <li class="nav-item nav-icon dropdown">
                             <a href="#" class="nav-item nav-icon dropdown-toggle pr-0 search-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <img src="{{ getSingleMedia( auth()->user(), 'profile_image', null) }}" class="img-fluid avatar-rounded" alt="user">
+                                <img src="{{ getSingleMedia( auth()->user(), 'profile_image', null) }}" class="img-fluid avatar-rounded user-avatar-image" alt="user">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <li class="dropdown-item d-flex ">
