@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="mm-cart-text">
                                         <h5 class="font-weight-700">{{ $data['dashboard']['total_rider'] }}</h5>
-                                        <p class="mb-0s">{{ __('message.total_rider') }}</p>
+                                        <p class="mb-0">{{ __('message.total_rider') }}</p>
                                     </div>
                                 </div>
                             </div>

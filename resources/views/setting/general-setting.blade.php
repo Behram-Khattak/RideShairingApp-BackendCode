@@ -3,13 +3,13 @@
 {{ Form::hidden('id', null, array('placeholder' => 'id','class' => 'form-control')) }}
 {{ Form::hidden('page', $page, array('placeholder' => 'id','class' => 'form-control')) }}
 <div class="row">
-    <div class="col-lg-6"> 
+    <div class="col-lg-6">
         <div class="form-group">
             <label for="avatar" class="col-sm-3 form-control-label">{{ __('message.logo') }}</label>
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src="{{ getSingleMedia($settings,'site_logo') }}" width="100"  id="site_logo_preview" alt="site_logo" class="image site_logo site_logo_preview">
+                        <img src="{{ asset('images/logo.jpg') }}" width="100"  id="site_logo_preview" alt="site_logo" class="image site_logo site_logo_preview">
                         @if(getMediaFileExit($settings, 'site_logo'))
                             <a class="text-danger remove-file" href="{{ route('remove.file', ['id' => $settings->id, 'type' => 'site_logo']) }}"
                                 data--submit="confirm_form"
@@ -95,7 +95,7 @@
                 {{ Form::text('site_name', null, ['class'=>"form-control" ,'placeholder'=> __('message.site_name') ]) }}
             </div>
         </div>
-        
+
         <div class="form-group">
             {{ Form::label('site_description',__('message.site_description'), ['class' => 'col-sm-6  form-control-label']) }}
             <div class="col-sm-12">
@@ -167,7 +167,7 @@
                 {{ Form::text('twitter_url', null, ['class'=>"form-control", 'placeholder' => __('message.enter_name',[ 'name' => __('message.twitter_url') ]) ]) }}
             </div>
         </div>
-        
+
         <div class="form-group">
             {{ Form::label('linkedin_url',__('message.linkedin_url'), ['class' => 'col-sm-6  form-control-label']) }}
             <div class="col-sm-12">
@@ -181,7 +181,7 @@
                 {{ Form::text('instagram_url', null, ['class'=>"form-control", 'placeholder' => __('message.enter_name',[ 'name' => __('message.instagram_url') ]) ]) }}
             </div>
         </div>
-        
+
         <div class="form-group">
             {{ Form::label('copyright_text',__('message.copyright_text'), ['class' => 'col-sm-6  form-control-label']) }}
             <div class="col-sm-12">
@@ -196,7 +196,7 @@
         </div>
     </div>
     <hr>
-     <div class="col-lg-12"> 
+     <div class="col-lg-12">
         <div class="form-group">
             <div class="col-md-offset-3 col-sm-12 ">
                 {{ Form::submit(__('message.save'), ['class'=>"btn btn-md btn-primary float-md-right"]) }}
