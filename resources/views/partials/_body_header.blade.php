@@ -10,10 +10,10 @@
                 </a>
             </div>
             <div class="mm-search-bar device-search m-auto">
-                {{-- @if( !env('MQTT_UNIQUE_TOPIC_NAME') )
+                @if( !env('MQTT_UNIQUE_TOPIC_NAME') )
                     <h5 class="text-danger"><i class="fas fa-exclamation-circle"></i> Notes: Set <b>MQTT_UNIQUE_TOPIC_NAME</b> in .env file and also set in application lib/utils/Constants.dart.</h5>
                     <h5 class="text-danger">Also update that in your both application</h5>
-                @endif --}}
+                @endif
                 {{-- <form action="#" class="searchbox">
                     <a class="search-link" href="#"><i class="ri-search-line"></i></a>
                     <input type="text" class="text search-input" placeholder="Search here...">

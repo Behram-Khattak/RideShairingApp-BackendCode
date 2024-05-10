@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <img src="{{ asset('images/logo.jpg') }}" width="100"  id="site_logo_preview" alt="site_logo" class="image site_logo site_logo_preview">
-                        @if(getMediaFileExit($settings, 'site_logo'))
+                        @if(asset('images/logo.jpg'))
                             <a class="text-danger remove-file" href="{{ route('remove.file', ['id' => $settings->id, 'type' => 'site_logo']) }}"
                                 data--submit="confirm_form"
                                 data--confirmation='true'
@@ -37,8 +37,8 @@
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src="{{ getSingleMedia($settings,'site_dark_logo') }}" width="100"  id="site_dark_logo_preview" alt="site_dark_logo" class="image site_dark_logo site_dark_logo_preview border">
-                        @if(getMediaFileExit($settings, 'site_dark_logo'))
+                        <img src="{{ asset('images/logo.jpg') }}" width="100"  id="site_dark_logo_preview" alt="site_dark_logo" class="image site_dark_logo site_dark_logo_preview border">
+                        @if(asset('images/logo.jpg'))
                             <a class="text-danger remove-file" href="{{ route('remove.file', ['id' => $settings->id, 'type' => 'site_dark_logo']) }}"
                                 data--submit="confirm_form"
                                 data--confirmation='true'
@@ -65,8 +65,8 @@
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src="{{ getSingleMedia($settings,'site_favicon') }}" height="30"  id="site_favicon_preview" alt="site_favicon" class="image site_favicon site_favicon_preview">
-                        @if(getMediaFileExit($settings, 'site_favicon'))
+                        <img src="{{ asset('images/logo.jpg') }}" height="30"  id="site_favicon_preview" alt="site_favicon" class="image site_favicon site_favicon_preview">
+                        @if(asset('images/logo.jpg'))
                             <a class="text-danger remove-file" href="{{ route('remove.file', ['id' => $settings->id, 'type' => 'site_favicon']) }}"
                                 data--submit="confirm_form"
                                 data--confirmation='true'
