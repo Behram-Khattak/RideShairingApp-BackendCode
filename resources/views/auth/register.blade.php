@@ -6,8 +6,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="auth-logo">
-                            <img src="{{ getSingleMedia(appSettingData('get'),'site_logo',null) }}" class="img-fluid mode light-img rounded-normal" alt="logo">
-                            <img src="{{ getSingleMedia(appSettingData('get'),'site_dark_logo',null) }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
+                            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal" alt="logo">
+                            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
                         </div>
                         <h2 class="mb-2 text-center">{{ __('message.sign_up') }}</h2>
                         <!-- Session Status -->
@@ -36,7 +36,7 @@
                                     {{ Form::label('username',__('message.username').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('username', old('username'), ['class' => 'form-control', 'required', 'placeholder' => __('message.username') ]) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-6">
                                     {{ Form::label('password',__('message.password').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::password('password', ['class' => 'form-control', 'placeholder' => __('message.password') ]) }}
@@ -51,7 +51,7 @@
                                     {{ Form::label('contact_number',__('message.contact_number').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('contact_number', old('contact_number'),[ 'placeholder' => __('message.contact_number'), 'class' => 'form-control', 'id' => 'phone' ]) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-6">
                                     {{ Form::label('gender',__('message.gender').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                     {{ Form::select('gender',[ 'male' => __('message.male'), 'female' => __('message.female'), 'other' => __('message.other') ], old('gender'), [ 'class' => 'form-control select2js', 'required' ]) }}
