@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="shortcut icon" class="site_favicon_preview" href="{{ getSingleMedia(appSettingData('get'), 'site_favicon', null) }}" />
+        <link rel="shortcut icon" class="site_favicon_preview" href="{{ asset('images/logo.jpg') }}" />
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -28,7 +28,7 @@
     </body>
     <script>
         @if(isset($assets) && in_array('phone', $assets))
-            var input = document.querySelector("#phone"), 
+            var input = document.querySelector("#phone"),
             errorMsg = document.querySelector("#error-msg"),
             validMsg = document.querySelector("#valid-msg");
 
