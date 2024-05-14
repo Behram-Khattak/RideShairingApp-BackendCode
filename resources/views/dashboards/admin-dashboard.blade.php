@@ -261,57 +261,62 @@
         <!-- Page end  -->
     </div>
     @section('bottom_script')
-    <script>
+        <script>
+            var cash_yearly = [ {{ implode ( ',' , $data['cash_yearly'] ) }} ];
+            // var wallet_yearly = [ {{ implode ( ',' , $data['wallet_yearly'] ) }} ];
 
-        var options = {
-            series: [{
-                name: "{{ __('message.cash') }}",
-                data: [ <?= implode ( ',' , $data['cash_yearly'] ) ?> ]
-            }, {
-                name: "{{ __('message.wallet') }}",
-                data:[ <?= implode ( ',' , $data['wallet_yearly'] ) ?> ]
-            }],
-            chart: {
-                type: 'bar',
-                height: 350
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    endingShape: 'rounded'
+            var options = {
+                series: [
+                    {
+                        name: "{{ __('message.cash') }}",
+                        data: cash_yearly
+                    },
+                    // {
+                    //     name: "{{ __('message.wallet') }}",
+                    //     data: wallet_yearly
+                    // }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 350
                 },
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
-            },
-            xaxis: {
-                categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-            },
-            yaxis: {
-                title: {
-                    text: ''
-                }
-            },
-            fill: {
-                opacity: 1
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return val
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                },
+                yaxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                            return val
+                        }
                     }
                 }
-            }
-        };
+            };
 
-        var chart = new ApexCharts(document.querySelector("#dash-income-chart"), options);
-        chart.render();
-    </script>
+            var chart = new ApexCharts(document.querySelector("#dash-income-chart"), options);
+            chart.render();
+        </script>
     @endsection
 </x-master-layout>

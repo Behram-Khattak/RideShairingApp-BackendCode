@@ -9,7 +9,7 @@
             </div> --}}
             <div class="col-lg-12 text-center">
                 <span class="mr-1">
-                    {{ __('message.copyright') }} {{ date('Y') }} &copy; <a href="#" class="">{{ env('APP_NAME') }}</a>
+                    {{ __('message.copyright') }} {{ date('Y') }} &copy; <a href="{{ route('home') }}" class="">{{ env('APP_NAME') }}</a>
                     {{ __('message.all_rights_reserved') }}
                 </span>
             </div>

@@ -288,7 +288,7 @@ return array(
         'payment_status_message' => 'Ride #:id payment status is :status.',
     ),
     'notification_settings' => 'Notification Setting',
-    'notification_list' => 
+    'notification_list' =>
     array(
         'IS_ONESIGNAL' => 'OneSignal',
         'IS_FIREBASE' => 'FireBase',
@@ -413,7 +413,7 @@ return array(
     'booked_by' => 'Booked by',
     'debit' => 'Debit',
     'transaction_submitted' => 'Transaction Submitted',
-    'riderequest_already_accepted_by_driver' => 'Ride request has been already accepted by another driver!', 
+    'riderequest_already_accepted_by_driver' => 'Ride request has been already accepted by another driver!',
     'requested_driver' => 'Requested Driver',
     'book_now' => 'Book Now',
     'dispatch' => 'Dispatch',
