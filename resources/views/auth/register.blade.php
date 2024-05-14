@@ -6,8 +6,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="auth-logo">
-                            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal" alt="logo">
-                            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
+                            <img src="{{ getSingleMedia(appSettingData('get'),'site_logo',null) }}" class="img-fluid mode light-img rounded-normal" alt="logo">
+                            <img src="{{ getSingleMedia(appSettingData('get'),'site_dark_logo',null) }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
                         </div>
                         <h2 class="mb-2 text-center">{{ __('message.sign_up') }}</h2>
                         <!-- Session Status -->

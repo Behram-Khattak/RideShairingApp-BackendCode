@@ -6,8 +6,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="auth-logo">
-                            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal" alt="logo">
-                            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
+                            {{-- <img src="{{ getSingleMedia(appSettingData('get'),'site_logo',null) }}" class="img-fluid mode light-img rounded-normal" alt="logo"> --}}
+                            <img src="{{ getSingleMedia(appSettingData('get'), 'site_logo',null) }}" class="img-fluid mode light-img rounded-normal" alt="logo">
+                            <img src="{{ getSingleMedia(appSettingData('get'),'site_dark_logo',null) }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
                         </div>
                         <h2 class="mb-2 text-center">{{ __('message.sign_in') }}</h2>
                         <p class="text-center">{{ __('message.login_with_your_personal_info') }}</p>
@@ -22,13 +23,13 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label >{{ __('message.email') }}</label>
-                                        <input id="email" type="email" name="email"  value="{{old('email')}}"   class="form-control"  placeholder="admin@example.com" required autofocus>
+                                        <input id="email" type="email" name="email" value="admin@admin.com"   class="form-control"  placeholder="admin@example.com" required autofocus>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label >{{ __('message.password') }}</label>
-                                        <input class="form-control" type="password" placeholder="********"  name="password"  required autocomplete="current-password">
+                                        <input class="form-control" type="password" placeholder="********" value="12345678"  name="password"  required autocomplete="current-password">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

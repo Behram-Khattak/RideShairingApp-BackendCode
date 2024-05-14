@@ -53,7 +53,7 @@ function appSettingData($type = 'get')
 }
 
 function json_message_response( $message, $status_code = 200)
-{	
+{
 	return response()->json( [ 'message' => $message ], $status_code );
 }
 
@@ -89,7 +89,7 @@ function saveRideHistory($data)
     $mqtt_event = 'test_connection';
     $history_data = [];
     $sendTo = [];
-    
+
     $ride_request_id = $data['ride_request']->id;
     $ride_request = RideRequest::find($ride_request_id);
     switch ($data['history_type']) {
@@ -109,7 +109,7 @@ function saveRideHistory($data)
             ];
             $sendTo = removeValueFromArray(['admin', 'rider'], $user_type);
             break;
-        
+
         case 'no_drivers_available':
             # code...
             break;
@@ -141,7 +141,7 @@ function saveRideHistory($data)
             $mqtt_event = 'ride_request_status';
             $sendTo = removeValueFromArray(['admin', 'rider'], $user_type);
             break;
-        
+
         // ride is in progress from the start to the end location
         case 'in_progress':
             $data['history_message'] = __('message.ride.in_progress');
@@ -152,10 +152,10 @@ function saveRideHistory($data)
             $mqtt_event = 'ride_request_status';
             $sendTo = removeValueFromArray(['admin', 'rider'], $user_type);
             break;
-        
+
         case 'canceled':
             $data['history_message'] = __('message.ride.canceled');
-            
+
             if( $ride_request->cancel_by == 'auto' ) {
                 $history_data = [
                     'cancel_by' => $ride_request->cancel_by,
@@ -181,7 +181,7 @@ function saveRideHistory($data)
                     'driver_name' => optional($ride_request->driver)->display_name ?? '',
                 ];
             }
-            
+
             $mqtt_event = 'ride_request_status';
             $sendTo = removeValueFromArray(['admin', 'rider', 'driver'], $user_type);
             break;
@@ -204,7 +204,7 @@ function saveRideHistory($data)
             ];
             $sendTo = removeValueFromArray(['admin', 'rider'], $user_type);
             break;
-        
+
         case 'completed':
             $data['history_message'] = __('message.ride.completed');
             $history_data = [
@@ -242,7 +242,7 @@ function saveRideHistory($data)
             'subject' => __('message.'.$data['history_type']),
             'message' => $data['history_message'],
         ];
-    
+
         $notify_data = new \stdClass();
         $notify_data->success = true;
         $notify_data->success_type = $data['history_type'];
@@ -260,7 +260,7 @@ function saveRideHistory($data)
                     $user = User::whereId( $ride_request->driver_id )->first();
                     break;
             }
-            
+
             if($user != null )
             {
                 if($send != 'driver') {
@@ -811,11 +811,11 @@ function km_to_mile($km) {
 
 function mighty_get_distance_matrix($pick_lat, $pick_lng, $drop_lat, $drop_lng, $traffic = false) {
     $google_map_api_key = env('GOOGLE_MAP_KEY');
-        
+
     $response = Http::withHeaders([
         'Accept-Language' => request('language'),
     ])->get('https://maps.googleapis.com/maps/api/distancematrix/json?origins='.$pick_lat.','.$pick_lng.'&destinations='.$drop_lat.','.$drop_lng.'&key='.$google_map_api_key.'&mode=driving');
-    
+
     $responses = $response->json();
 
     return $responses;
@@ -859,13 +859,13 @@ function first_element_in_distance_matrix($distance_matrix)
 function calculateRideFares($distance_in_unit, $dropoff_time_in_seconds, $service, $coupon = null)
 {
     $time_price = 0;
-    
+
     $distance_unit = $service['distance_unit'] ?? 'km';
     $minimum_distance =  $service['minimum_distance'] ?? 0;
     if( $distance_unit == 'mile' ) {
         $distance_in_unit = km_to_mile($distance_in_unit);
     }
-    
+
     $base_fare = $service['base_fare'];
     // distance_in_unit in km
     $time_price = ($dropoff_time_in_seconds / 60) * $service['per_minute_drive'];
@@ -878,7 +878,7 @@ function calculateRideFares($distance_in_unit, $dropoff_time_in_seconds, $servic
 
     // addition of base fare and distance price
     $base_and_distance_price = ($base_fare + $distance_price);
-    
+
     $total_amount = $base_and_distance_price + $time_price;
 
     if( $total_amount < $service['minimum_fare'] ){
@@ -957,7 +957,7 @@ function calculate_distance($lat1, $lng1, $lat2, $lng2, $unit)
 function SettingData($type, $key = null)
 {
     $setting = Setting::where('type',$type);
-   
+
     $setting->when($key != null, function ($q) use($key) {
         return $q->where('key', $key);
     });
@@ -974,13 +974,13 @@ function getPriceFormat($price)
     if($price === null){
         $price = 0;
     }
-    
+
     $currency_code = SettingData('CURRENCY', 'CURRENCY_CODE') ?? 'USD';
     $currecy = currencyArray($currency_code);
 
     $code = $currecy['symbol'] ?? '$';
     $position = SettingData('CURRENCY', 'CURRENCY_POSITION') ?? 'left';
-    
+
     if ($position == 'left') {
         $price = $code."".number_format( (float) $price,2,'.','');
     } else {

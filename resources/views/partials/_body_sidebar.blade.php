@@ -237,8 +237,10 @@
 <div class="mm-sidebar sidebar-default">
     <div class="mm-sidebar-logo d-flex align-items-center justify-content-between">
         <a href="{{ route('home') }}" class="header-logo">
-            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal light-logo site_logo_preview" alt="logo">
-            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
+            {{-- <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode light-img rounded-normal light-logo site_logo_preview" alt="logo">
+            <img src="{{ asset('images/logo.jpg') }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo"> --}}
+            <img src="{{ getSingleMedia(appSettingData('get'),'site_logo',null) }}" class="img-fluid mode light-img rounded-normal light-logo site_logo_preview" alt="logo">
+            <img src="{{ getSingleMedia(appSettingData('get'),'site_dark_logo',null) }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
         </a>
         <div class="side-menu-bt-sidebar">
             <i class="fas fa-bars wrapper-menu"></i>

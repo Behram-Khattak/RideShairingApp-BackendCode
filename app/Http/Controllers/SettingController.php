@@ -55,7 +55,7 @@ class SettingController extends Controller
         $settings = AppSetting::first();
         $user_data = User::find($user_id);
         $envSettting = $envSettting_value = [];
-               
+
         if(count($envSettting) > 0 ){
             $envSettting_value = Setting::whereIn('key',array_keys($envSettting))->get();
         }
@@ -83,7 +83,7 @@ class SettingController extends Controller
                         $getSetting[]=$k.'_'.$sk;
                     }
                 }
-                
+
                 $setting_value = Setting::whereIn('key',$getSetting)->get();
 
                 $data  = view('setting.'.$page, compact('setting', 'setting_value', 'page'))->render();
@@ -91,11 +91,11 @@ class SettingController extends Controller
             case 'wallet-setting':
                 $page = 'wallet-setting';
                 $wallet_setting = config('constant.wallet');
-                
+
                 foreach ($wallet_setting as $key => $val) {
                     $wallet_setting[$key] = Setting::where('key',$key)->pluck('value')->first();
                 }
-                
+
                 $data  = view('setting.'.$page, compact('wallet_setting', 'page'))->render();
                 break;
             case 'ride-setting':
@@ -104,14 +104,14 @@ class SettingController extends Controller
                 foreach ($ride_setting as $key => $val) {
                     $ride_setting[$key] = Setting::where('key',$key)->pluck('value')->first();
                 }
-                
+
                 $data  = view('setting.'.$page, compact('ride_setting', 'page'))->render();
                 break;
             case 'notification-setting':
                 $notification_setting = config('constant.notification');
                 $page = 'notification-setting';
                 $notification_setting_data = AppSetting::first();
-               
+
                 $data  = view('setting.'.$page, compact('notification_setting', 'page', 'notification_setting_data'))->render();
                 break;
             case 'payment-setting':
@@ -132,7 +132,7 @@ class SettingController extends Controller
             return redirect()->route('setting.index', ['page' => 'mobile-config'])->withErrors(__('message.demo_permission_denied'));
         }
         $data = $request->all();
-        
+
         foreach($data['key'] as $key => $val){
             $value = ( $data['value'][$key] != null) ? $data['value'][$key] : null;
             $input = [
@@ -151,15 +151,15 @@ class SettingController extends Controller
         if(env('APP_DEMO')){
             return redirect()->route('setting.index', ['page' => $page])->withErrors(__('message.demo_permission_denied'));
         }
-        $language_option= $request->language_option;
+        // $language_option= $request->language_option;
 
-        if(!is_array($language_option)){
-            $language_option=(array)$language_option;
-        }
+        // if(!is_array($language_option)){
+        //     $language_option=(array)$language_option;
+        // }
 
-        array_push($language_option, $request->env['DEFAULT_LANGUAGE']);
+        // array_push($language_option, $request->env['DEFAULT_LANGUAGE']);
 
-        $request->merge(['language_option' => $language_option]);
+        // $request->merge(['language_option' => $language_option]);
 
         $request->merge(['site_name' => str_replace("'", "", str_replace('"', '', $request->site_name))]);
 
@@ -174,26 +174,26 @@ class SettingController extends Controller
         }
 
         $message = '';
-        
-        App::setLocale($env['DEFAULT_LANGUAGE']);
-        session()->put('locale', $env['DEFAULT_LANGUAGE']);
+
+        // App::setLocale($env['DEFAULT_LANGUAGE']);
+        // session()->put('locale', $env['DEFAULT_LANGUAGE']);
 
         if($request->timezone != '') {
-            $user = auth()->user();            
+            $user = auth()->user();
             $user->timezone = $request->timezone;
             $user->save();
         }
         uploadMediaFile($res,$request->site_logo, 'site_logo');
         uploadMediaFile($res,$request->site_dark_logo, 'site_dark_logo');
         uploadMediaFile($res,$request->site_favicon, 'site_favicon');
-        
+
         appSettingData('set');
 
-        createLangFile($env['DEFAULT_LANGUAGE']);
+        // createLangFile($env['DEFAULT_LANGUAGE']);
 
         return redirect()->route('setting.index', ['page' => $page])->withSuccess( __('message.updated'));
     }
-    
+
     public function envChanges(Request $request)
     {
         $page = $request->page;
@@ -236,9 +236,9 @@ class SettingController extends Controller
 
         if($user == "") {
             $message = __('message.not_found_entry',[ 'name' => __('message.user') ]);
-            return json_message_response($message,400);   
+            return json_message_response($message,400);
         }
-        
+
         $validator= Validator::make($request->all(), [
             'old' => 'required|min:8|max:255',
             'password' => 'required|min:8|confirmed|max:255',
@@ -247,7 +247,7 @@ class SettingController extends Controller
         if ($validator->fails()) {
             return redirect()->route('setting.index', ['page' => 'password_form'])->with('errors',$validator->errors());
         }
-           
+
         $hashedPassword = $user->password;
 
         $match = Hash::check($request->old, $hashedPassword);
@@ -273,7 +273,7 @@ class SettingController extends Controller
             return redirect()->route('setting.index', ['page' => 'password_form'])->with('error',$message);
         }
     }
-    
+
     public function termAndCondition(Request $request)
     {
         $setting_data = Setting::where('type','terms_condition')->where('key','terms_condition')->first();
@@ -293,7 +293,7 @@ class SettingController extends Controller
         $setting_data = [
                         'type'  => 'terms_condition',
                         'key'   =>  'terms_condition',
-                        'value' =>  $request->value 
+                        'value' =>  $request->value
                     ];
         $result = Setting::updateOrCreate(['id' => $request->id],$setting_data);
         if($result->wasRecentlyCreated)
@@ -326,7 +326,7 @@ class SettingController extends Controller
         $setting_data = [
                         'type'   => 'privacy_policy',
                         'key'   =>  'privacy_policy',
-                        'value' =>  $request->value 
+                        'value' =>  $request->value
                     ];
         $result = Setting::updateOrCreate(['id' => $request->id],$setting_data);
         if($result->wasRecentlyCreated)
@@ -359,7 +359,7 @@ class SettingController extends Controller
             return redirect()->route('setting.index', ['page' => 'wallet-setting'])->withErrors(__('message.demo_permission_denied'));
         }
         $data = $request->all();
-        
+
         foreach(config('constant.wallet') as $key => $val){
             $input = [
                 'type'  => 'wallet',
@@ -368,7 +368,7 @@ class SettingController extends Controller
             ];
             Setting::updateOrCreate(['key' => $key],$input);
         }
-        
+
         return redirect()->route('setting.index', ['page' => 'wallet-setting'])->withSuccess( __('message.updated'));
     }
 
@@ -378,7 +378,7 @@ class SettingController extends Controller
             return redirect()->route('setting.index', ['page' => 'ride-setting'])->withErrors(__('message.demo_permission_denied'));
         }
         $data = $request->all();
-        
+
         foreach(config('constant.ride') as $key => $val){
             $input = [
                 'type'  => 'ride',
@@ -387,7 +387,7 @@ class SettingController extends Controller
             ];
             Setting::updateOrCreate(['key' => $key],$input);
         }
-        
+
         return redirect()->route('setting.index', ['page' => 'ride-setting'])->withSuccess( __('message.updated'));
     }
 
@@ -397,10 +397,9 @@ class SettingController extends Controller
             return redirect()->route('setting.index', ['page' => 'notification-setting'])->withErrors(__('message.demo_permission_denied'));
         }
         $app_setting = AppSetting::getData();
-        
+
         AppSetting::updateOrCreate(['id' => $app_setting->id ], ['notification_settings' => $request->notification_settings]);
 
         return redirect()->route('setting.index', ['page' => 'notification-setting'])->withSuccess( __('message.updated'));
     }
 }
- 
