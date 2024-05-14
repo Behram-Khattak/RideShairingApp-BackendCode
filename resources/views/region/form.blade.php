@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="new-user-info">
                             <div class="row">
-                                {{ Form::hidden('coordinates', old('coordinates'), [ 'id' => 'coordinates' ] ) }}
+                                {{ Form::hidden('coordinates', old('coordinates'), [ 'id' => 'coordinates', 'class' =>'form-control','required' ] ) }}
                                 <div class="form-group col-md-4">
                                     {{ Form::label('name',__('message.name').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('name',old('name'),['placeholder' => __('message.name'),'class' =>'form-control','required']) }}
@@ -28,7 +28,7 @@
                                     {{ Form::label('distance_unit',__('message.distance_unit').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                     {{ Form::select('distance_unit',[ 'km' => __('message.km') ,'mile' => __('message.mile') ], old('distance_unit') ,[ 'class' =>'form-control select2js','required']) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-4">
                                     {{ Form::label('timezone', __('message.timezone'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('timezone', [], old('timezone') , [
@@ -38,7 +38,7 @@
                                         ])
                                     }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-4">
                                     {{ Form::label('status',__('message.status').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                     {{ Form::select('status',[ '1' => __('message.active') ,'0' => __('message.inactive') ], old('status'), [ 'class' =>'form-control select2js','required']) }}
@@ -66,12 +66,12 @@
     @section('bottom_script')
     <script>
         $(document).ready(function() {
-            
+
             var map; // Global declaration of the map
             var drawingManager;
             var last_latlong = null;
             var polygons = [];
-            
+
             function initialize() {
                 var myLatlng = new google.maps.LatLng(20.947940, 72.955786);
                 var myOptions = {
@@ -79,7 +79,7 @@
                     center: myLatlng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 }
-                
+
                 map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
                 drawingManager = new google.maps.drawing.DrawingManager({
                     drawingMode: google.maps.drawing.OverlayType.POLYGON,
@@ -88,23 +88,23 @@
                         position: google.maps.ControlPosition.TOP_CENTER,
                         drawingModes: [google.maps.drawing.OverlayType.POLYGON]
                     },
-                    
+
                     polygonOptions: {
                         editable: true
                     }
                 });
-                
+
                 drawingManager.setMap(map);
 
                 const resetDiv = document.createElement('div');
                 resetMap(resetDiv, last_latlong);
                 map.controls[google.maps.ControlPosition.TOP_CENTER].push(resetDiv);
-            }             
+            }
             if(window.google || window.google.maps) {
                 initialize();
             }
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition( 
+                navigator.geolocation.getCurrentPosition(
                     (position) => {
                     const pos = {
                         lat: position.coords.latitude,
@@ -113,12 +113,12 @@
                     map.setCenter(pos);
                 });
             }
-            
+
             google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
                 if ( last_latlong ) {
                     last_latlong.setMap(null);
                 }
-                
+
                 $('#coordinates').val(event.overlay.getPath().getArray());
                 last_latlong = event.overlay;
                 auto_grow();
@@ -160,7 +160,7 @@
                     $('#coordinates').val('');
                 });
             }
-        
+
         });
     </script>
     @endsection

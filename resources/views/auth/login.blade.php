@@ -6,7 +6,6 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="auth-logo">
-                            {{-- <img src="{{ getSingleMedia(appSettingData('get'),'site_logo',null) }}" class="img-fluid mode light-img rounded-normal" alt="logo"> --}}
                             <img src="{{ getSingleMedia(appSettingData('get'), 'site_logo',null) }}" class="img-fluid mode light-img rounded-normal" alt="logo">
                             <img src="{{ getSingleMedia(appSettingData('get'),'site_dark_logo',null) }}" class="img-fluid mode dark-img rounded-normal darkmode-logo site_dark_logo_preview" alt="dark-logo">
                         </div>

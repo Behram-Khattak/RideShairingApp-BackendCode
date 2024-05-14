@@ -46,10 +46,15 @@ class RegionController extends Controller
      */
     public function store(RegionRequest $request)
     {
+        $request->validate([
+            'coordinates' => ['required'],
+        ]);
+
         if(env('APP_DEMO')){
             return redirect()->route('region.index')->withErrors(__('message.demo_permission_denied'));
         }
         $coordinates = $request->coordinates;
+
         foreach(explode('),(',trim($coordinates,'()')) as $index => $single_array){
             if($index == 0)
             {
@@ -126,7 +131,7 @@ class RegionController extends Controller
             $polygon[] = new Point($latlong[0], $latlong[1]);
         }
         $polygon[] = new Point($last_latlong[0], $last_latlong[1]);
-        
+
         $region->name = $request->name;
         $region->distance_unit = $request->distance_unit;
         $region->status = $request->status;
