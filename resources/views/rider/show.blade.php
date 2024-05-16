@@ -1,6 +1,6 @@
 <x-master-layout>
 <div class="container-fluid">
-    <div class="row">            
+    <div class="row">
         <div class="col-lg-12">
             <div class="card card-block card-stretch">
                 <div class="card-body p-0">
@@ -41,20 +41,20 @@
                     </div>
                     <div class="pro-content rounded">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="p-icon mr-3"> 
+                            <div class="p-icon mr-3">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <p class="mb-0 eml">{{ $data->email }}</p>
                         </div>
                         <div class="d-flex align-items-center mb-3">
-                            <div class="p-icon mr-3"> 
+                            <div class="p-icon mr-3">
                                 <i class="fas fa-phone-alt"></i>
                             </div>
                             <p class="mb-0">{{ $data->contact_number }}</p>
                         </div>
                         <div class="d-flex align-items-center mb-3">
-                            <div class="p-icon mr-3"> 
-                                
+                            <div class="p-icon mr-3">
+
                                 @if( $data->gender == 'female' )
                                     <i class="fas fa-female"></i>
                                 @elseif( $data->gender == 'other' )
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="col-lg-8">
             <div class="row">
                 <div class="card card-block">
@@ -117,11 +117,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-4">
                     <div class="card card-block">
                         <div class="card-body">
-                            <div class="top-block-one">                                
+                            <div class="top-block-one">
                                 <p class="mb-1">{{ __('message.wallet_balance') }}</p>
                                 <p></p>
                                 <h5>{{ getPriceFormat(optional($data->userWallet)->total_amount) ?? 0 }} </h5>
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-{{--
+
                 <div class="col-md-4">
                     <div class="card card-block">
                         <div class="card-body">
@@ -143,10 +143,10 @@
                         </div>
                     </div>
                 </div>
---}}
-            </div>
 
-            <div class="row">
+            </div> --}}
+
+            {{-- <div class="row">
                 <div class="card card-block">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
@@ -181,7 +181,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row">
                 <div class="card card-block">
                     <div class="card-header d-flex justify-content-between">
@@ -195,7 +195,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </div>
 @section('bottom_script')
     {{ $dataTable->scripts() }}
@@ -203,7 +203,7 @@
         (function($) {
             "use strict";
             $(document).ready(function() {
-                
+
                 var type = $("#type :selected").val();
                 transactionTypeList(type);
                 $(document).on('change', '#type' , function (){
@@ -216,7 +216,7 @@
             function transactionTypeList(type) {
                 var route = "{{ route('ajax-list',['type' => 'transaction_type','user_type' => 'rider', 'type_val' =>'']) }}"+type;
                 route = route.replaceAll('amp;','');
-                
+
                 $.ajax({
                     url: route,
                     success: function(result){
