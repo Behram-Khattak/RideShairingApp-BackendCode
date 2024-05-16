@@ -43,7 +43,7 @@
                                     {{ Form::label('capacity', __('message.capacity').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::number('capacity', old('capacity'),[ 'min' => 1, 'placeholder' => __('message.capacity'),'class' =>'form-control','required']) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-4">
                                     {{ Form::label('base_fare', __('message.base_fare').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::number('base_fare', old('base_fare'), ['class' => 'form-control', 'min' => 0, 'step' => 'any', 'required', 'placeholder' => __('message.base_fare') ]) }}
@@ -53,7 +53,7 @@
                                     {{ Form::label('minimum_fare', __('message.minimum_fare').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::number('minimum_fare', old('minimum_fare'), ['class' => 'form-control',  'min' => 0, 'step' => 'any', 'required', 'placeholder' => __('message.minimum_fare') ]) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-4">
                                     {{ Form::label('minimum_distance',__('message.minimum_distance').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::number('minimum_distance', old('minimum_distance'),  ['class' => 'form-control', 'min' => 0, 'step' => 'any', 'placeholder' =>  __('message.minimum_distance') ]) }}
@@ -73,7 +73,7 @@
                                     {{ Form::label('waiting_time_limit',__('message.waiting_time_limit').'('.__('message.in_minutes').')<span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                     {{ Form::number('waiting_time_limit', old('waiting_time_limit'),[ 'min' => 0, 'step' => 'any', 'placeholder' => __('message.waiting_time_limit'), 'class' => 'form-control' ]) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-4">
                                     {{ Form::label('per_minute_wait',__('message.per_minute_wait').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                     {{ Form::number('per_minute_wait', old('per_minute_wait'),[  'min' => 0, 'step' => 'any', 'placeholder' => __('message.per_minute_wait'), 'class' => 'form-control' ]) }}
@@ -86,7 +86,8 @@
 
                                 <div class="form-group col-md-4">
                                     {{ Form::label('payment_method',__('message.payment_method').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
-                                    {{ Form::select('payment_method',[ 'cash' => __('message.cash') ,'wallet' => __('message.wallet') , 'cash_wallet' => __('message.cash_wallet') ], old('payment_method') ,[ 'class' =>'form-control select2js','required']) }}
+                                    {{ Form::select('payment_method',[ 'cash' => __('message.cash') ], old('payment_method') ,[ 'class' =>'form-control select2js','required']) }}
+                                    {{-- {{ Form::select('payment_method',[ 'cash' => __('message.cash') ,'wallet' => __('message.wallet') , 'cash_wallet' => __('message.cash_wallet') ], old('payment_method') ,[ 'class' =>'form-control select2js','required']) }} --}}
                                 </div>
 
                                 <div class="form-group col-md-4">
@@ -158,7 +159,7 @@
 
                     var data_distance_unit = $('#region_id').attr('data-distance-unit',)
                     var distance_unit = data.distance_unit != undefined ? data.distance_unit : data_distance_unit;
-                    
+
                     var text = "{{  __('message.distance_in_km') }}";
                     if ( distance_unit == 'mile' ) {
                         text = "{{  __('message.distance_in_mile') }}";

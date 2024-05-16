@@ -35,7 +35,7 @@ class DriverEarningDataTable extends DataTable
         ->editColumn('driver_commission', function ( $row ) {
             return getPriceFormat( $row->driver_commission ) ?? '-';
         })
-        
+
         ->editColumn('admin_commission', function ( $row ) {
             return getPriceFormat( $row->admin_commission) ?? '-';
         })
@@ -44,9 +44,9 @@ class DriverEarningDataTable extends DataTable
             return getPriceFormat( $row->total_withdrawn ) ?? '-';
         })
 
-        ->editColumn('wallet_balance', function ( $row ) {
-            return getPriceFormat( $row->wallet_balance ) ?? '-';
-        })
+        // ->editColumn('wallet_balance', function ( $row ) {
+        //     return getPriceFormat( $row->wallet_balance ) ?? '-';
+        // })
         ->rawColumns([ 'id' ]);
     }
 
@@ -64,7 +64,7 @@ class DriverEarningDataTable extends DataTable
             ->withSum('userWallet as total_withdrawn', 'total_withdrawn')
             ->withSum('getPayment as driver_commission', 'driver_commission')
             ->withSum('getPayment as admin_commission', 'admin_commission');
-            
+
         return $this->applyScopes($model);
     }
 
@@ -80,7 +80,7 @@ class DriverEarningDataTable extends DataTable
             Column::make('display_name')->title( __('message.name') ),
             Column::make('driver_commission')->title( __('message.driver_earning') )->searchable(false),
             Column::make('admin_commission')->title( __('message.admin_commission') )->searchable(false),
-            Column::make('wallet_balance')->title( __('message.wallet_balance') )->searchable(false),
+            // Column::make('wallet_balance')->title( __('message.wallet_balance') )->searchable(false),
             Column::make('total_withdrawn')->title( __('message.total_withdraw') )->searchable(false),
         ];
     }
