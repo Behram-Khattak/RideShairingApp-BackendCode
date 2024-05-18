@@ -24,7 +24,7 @@ class PaymentGatewayResource extends JsonResource
             'live_value'=> $this->live_value,
             'gateway_image' =>  getSingleMedia($this, 'gateway_image', null),
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,            
+            'updated_at' => $this->updated_at,
         ];
     }
 }

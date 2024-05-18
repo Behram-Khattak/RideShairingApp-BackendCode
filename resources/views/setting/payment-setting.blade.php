@@ -77,7 +77,7 @@
                                         </div>
                                         <span class="selected_file"></span>
                                     </div>
-        
+
                                     @if( isset($payment_setting_data) && getMediaFileExit($payment_setting_data, 'gateway_image'))
                                         <div class="col-md-2 mb-2">
                                             <img id="gateway_image_preview" src="{{ getSingleMedia($payment_setting_data,'gateway_image') }}" alt="gateway-image" class="attachment-image mt-1">

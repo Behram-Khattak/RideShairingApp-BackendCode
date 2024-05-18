@@ -116,7 +116,6 @@ class SettingController extends Controller
                 break;
             case 'payment-setting':
                 $payment_setting_data = PaymentGateway::where('type',$type)->first();
-                // dd($payment_setting_data);
                 $data  = view('setting.'.$page, compact('settings', 'page', 'type', 'payment_setting_data'))->render();
                 break;
             default:
