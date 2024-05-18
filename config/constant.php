@@ -22,15 +22,15 @@ return [
     ],
     'PAYMENT_GATEWAY_SETTING' => [
         // 'cash' => [],
-        'stripe' => [ 'url', 'secret_key', 'publishable_key' ],
-        'razorpay' => [ 'key_id', 'secret_id' ],
-        'paystack' => [ 'public_key' ],
-        'flutterwave' => [ 'public_key', 'secret_key', 'encryption_key' ],
+        // 'stripe' => [ 'url', 'secret_key', 'publishable_key' ],
+        // 'razorpay' => [ 'key_id', 'secret_id' ],
+        // 'paystack' => [ 'public_key' ],
+        // 'flutterwave' => [ 'public_key', 'secret_key', 'encryption_key' ],
         'paypal' => [ 'tokenization_key' ],
-        'paytabs' => [ 'client_key', 'profile_id', 'server_key'],
-        'mercadopago' => [ 'public_key', 'access_token' ],
-        'myfatoorah' => ['access_token'],
-        'paytm' => [ 'merchant_id', 'merchant_key' ],
+        // 'paytabs' => [ 'client_key', 'profile_id', 'server_key'],
+        // 'mercadopago' => [ 'public_key', 'access_token' ],
+        // 'myfatoorah' => ['access_token'],
+        // 'paytm' => [ 'merchant_id', 'merchant_key' ],
     ],
 
     'wallet' => [
