@@ -3947,8 +3947,9 @@ textarea.form-control.is-invalid {
     color: #fff
 }
 
+/* commented the flex property because there is only one payment gateway */
 .nav-fill .nav-item {
-    flex: 1 1 auto;
+    /* flex: 1 1 auto; */
     text-align: center
 }
 

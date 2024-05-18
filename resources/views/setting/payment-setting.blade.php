@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <ul class="nav nav-pills nav-fill tabslink" id="tab-text" role="tablist">
+        <ul class="nav nav-pills nav-fill tabslink my-4" id="tab-text" role="tablist">
             @foreach(config('constant.PAYMENT_GATEWAY_SETTING') as $key => $value)
                 <li class="nav-item">
                     <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=payment-setting&type={{$key}}" data-target=".paste_here" data-value="{{$key}}" id="pills-{{$key}}-tab-fill" data-toggle="tabajax" role="tab" class="nav-link {{ $key == $type ? 'active' : '' }}" aria-controls="pills-{{$key}}" aria-selected="{{ $key == $type ? true : false }}"> {{ __('message.'.$key) }}</a>
@@ -11,7 +11,9 @@
             <div class="card-body">
                 <div class="tab-content" id="pills-tabContent-1">
                     @foreach(config('constant.PAYMENT_GATEWAY_SETTING') as $key => $value)
-                    <div class="tab-pane fade {{ $key == $type ? 'active show' : '' }}" id="pills-{{$key}}-fill" role="tabpanel" aria-labelledby="pills-{{$key}}-tab-fill">
+                    {{-- commented this line because there is only one payment gateway used in the begining --}}
+                    {{-- <div class="tab-pane fade {{ $key == $type ? 'active show' : '' }}" id="pills-{{$key}}-fill" role="tabpanel" aria-labelledby="pills-{{$key}}-tab-fill"> --}}
+                    <div class="tab-pane fade active show" id="pills-{{$key}}-fill" role="tabpanel" aria-labelledby="pills-{{$key}}-tab-fill">
                         {{ Form::model($payment_setting_data, [ 'method' => 'POST', 'route' => ['paymentSettingsUpdate'], 'enctype'=>'multipart/form-data', 'data-toggle' => 'validator' ]) }}
                             {{ Form::hidden('id', null, [ 'class' => 'form-control'] ) }}
                             {{ Form::hidden('type', $key , [ 'class' => 'form-control' ]) }}
