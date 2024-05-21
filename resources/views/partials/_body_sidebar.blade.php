@@ -3,14 +3,14 @@
 
     $MyNavBar = \Menu::make('MenuList', function ($menu) use($url){
 
-        // $menu->add('<span>'. __('message.new_booking') .'</span>', ['route' => 'dispatch.create'])
-        //         ->prepend('<i class="fas fa-plus-square"></i>')
-        //         ->data('permission', 'dispatch add');
-
         //Admin Dashboard
         $menu->add('<span>'.__('message.dashboard').'</span>', ['route' => 'home'])
             ->prepend('<i class="fas fa-home"></i>')
             ->link->attr(['class' => '']);
+
+        $menu->add('<span>'. __('message.new_booking') .'</span>', ['route' => 'dispatch.create'])
+            ->prepend('<i class="fas fa-plus-square"></i>')
+            ->data('permission', 'dispatch add');
 
         $menu->add('<span>'.__('message.rider').'</span>', ['class' => ''])
             ->prepend('<i class="fas fa-user"></i>')
