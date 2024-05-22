@@ -24,7 +24,7 @@ class RideRequestDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            
+
             ->editColumn('driver_id' , function ( $riderequest ) {
                 return $riderequest->driver_id != null ? optional($riderequest->driver)->display_name : '';
             })
@@ -58,10 +58,10 @@ class RideRequestDataTable extends DataTable
             })
 
             ->editColumn('payment_status', function($riderequest) {
-                
+
                 $status = 'warning';
                 $payment_status = isset($riderequest->payment) ? $riderequest->payment->payment_status : __('message.pending');
-                
+
                 switch ($payment_status) {
                     case 'pending':
                         $status = 'warning';
@@ -75,7 +75,7 @@ class RideRequestDataTable extends DataTable
                 }
                 return '<span class="text-capitalize badge bg-'.$status.'">'.$payment_status.'</span>';
             })
-            
+
             ->filterColumn('payment_status', function( $query, $keyword ){
                 $query->whereHas('payment', function ($q) use($keyword){
                     $q->where('payment_status', 'like' , '%'.$keyword.'%');
@@ -93,10 +93,10 @@ class RideRequestDataTable extends DataTable
             })
 
             ->editColumn('status', function($riderequest) {
-                
+
                 $status = 'primary';
                 $ride_status = $riderequest->status;
-                
+
                 switch ($ride_status) {
                     case 'pending':
                         $status = 'warning';
@@ -151,7 +151,7 @@ class RideRequestDataTable extends DataTable
             Column::make('id')->title( '#' ),
             Column::make('rider_id')->title( __('message.rider') ),
             Column::make('riderequest_in_driver_id')->title( __('message.requested_driver') ),
-            Column::make('driver_id')->title( __('message.driver') ),
+            // Column::make('driver_id')->title( __('message.driver') ),
             Column::make('datetime')->title( __('message.datetime') ),
             // Column::make('total_amount')->title( __('message.total_amount') ),
             Column::make('payment_type')->title( __('message.payment_method') ),

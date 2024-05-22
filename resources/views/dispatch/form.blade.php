@@ -49,6 +49,7 @@
                                     {{ Form::label('service_id', __('message.service').' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
                                     <a class="float-right serviceList" href="javascript:void(0)"><i class="ri-refresh-line"></i></a>
                                     {{ Form::select('service_id', isset($id) ? [ optional($data->service)->id => optional($data->service)->display_name ] : [] , old('service_id') , [
+                                            'data-ajax--url' => route('ajax-list', [ 'type' => 'service' ]),
                                             'class' => 'select2js form-group service',
                                             'required',
                                             'data-placeholder' => __('message.select_name',[ 'select' => __('message.service') ]),
@@ -60,6 +61,7 @@
                                     {{ Form::label('driver_id', __('message.driver'), ['class' => 'form-control-label'], false) }}
                                     <a class="float-right driverList" href="#"><i class="ri-refresh-line"></i></a>
                                     {{ Form::select('driver_id', isset($id) ? [ optional($data->driver)->id => optional($data->driver)->display_name ] : [] , old('driver_id') , [
+                                            'data-ajax--url' => route('ajax-list', [ 'type' => 'driver' ]),
                                             'class' => 'select2js form-group driver',
                                             'data-placeholder' => __('message.select_name',[ 'select' => __('message.driver') ]),
                                         ])
@@ -104,7 +106,7 @@
                         $('#start_latitude').val(start_latitude);
                         $('#start_longitude').val(start_longitude);
                         $('#start_address').val(place.formatted_address);
-                        serviceList(start_latitude, start_longitude);                        
+                        serviceList(start_latitude, start_longitude);
                     });
 
                     var end_address_input = document.getElementById('end_address');
@@ -121,8 +123,8 @@
                         end_longitude = endplace.geometry['location'].lng();
                         $('#end_latitude').val(end_latitude);
                         $('#end_longitude').val(end_longitude);
-                        $('#end_address').val(endplace.formatted_address);                        
-                    });                   
+                        $('#end_address').val(endplace.formatted_address);
+                    });
                 }
 
                 $(document).on('change', '.service', function ()
@@ -149,7 +151,7 @@
             function serviceList(latitude, longitude) {
                 var route = "{{ route('ajax-list',[ 'type' => 'service_for_ride']) }}&latitude="+latitude+"&longitude="+longitude;
                 route = route.replaceAll('amp;','');
-                
+
                 $.ajax({
                     url: route,
                     success: function(result){
@@ -172,7 +174,7 @@
                     $('.driver').empty();
                 }
             });
-            
+
             function driverList(service_id)
             {
                 latitude = $('#start_latitude').val();
@@ -180,7 +182,7 @@
 
                 var route = "{{ route('ajax-list',[ 'type' => 'driver_for_ride']) }}&service_id="+service_id+"&latitude="+latitude+"&longitude="+longitude;
                 route = route.replaceAll('amp;','');
-                
+
                 $.ajax({
                     url: route,
                     success: function(result){

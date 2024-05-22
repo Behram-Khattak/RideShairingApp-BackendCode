@@ -42,7 +42,7 @@ class RideRequestController extends Controller
     public function create()
     {
         $pageTitle = __('message.add_form_title',[ 'form' => __('message.riderequest')]);
-        
+
         return view('riderequest.form', compact('pageTitle'));
     }
 
@@ -58,17 +58,17 @@ class RideRequestController extends Controller
 
         // Check if the rider has registred a riderequest already
         $rider_exists_riderequest = RideRequest::whereNotIn('status', ['canceled', 'completed'])->where('rider_id', auth()->user()->id)->where('is_schedule', 0)->exists();
-        
+
         if($rider_exists_riderequest) {
             return json_message_response(__('message.rider_already_in_riderequest'), 400);
         }
-        
+
         $coupon_code = $request->coupon_code;
 
         if( $coupon_code != null ) {
             $coupon = Coupon::where('code', $coupon_code)->first();
             $status = isset($coupon_code) ? 400 : 200;
-        
+
             if($coupon != null) {
                 $status = Coupon::isValidCoupon($coupon);
             }
@@ -83,7 +83,7 @@ class RideRequestController extends Controller
 
         $service = Service::with('region')->where('id',$request->service_id)->first();
         $data['distance_unit'] = $service->region->distance_unit ?? 'km';
-        
+
         $result = RideRequest::create($data);
 
         $message = __('message.save_form', ['form' => __('message.riderequest')]);
@@ -103,7 +103,7 @@ class RideRequestController extends Controller
                 'ride_request_id'   => $result->id,
                 'ride_request'      => $result,
             ];
-    
+
             saveRideHistory($history_data);
         }
         if($request->is('api/*')) {
@@ -145,7 +145,7 @@ class RideRequestController extends Controller
                 'ride_request_id'   => $result->id,
                 'ride_request'      => $result,
             ];
-    
+
             saveRideHistory($history_data);
             $riderequest->driver->update(['is_available' => 0]);
         } else {
@@ -198,7 +198,7 @@ class RideRequestController extends Controller
     {
         $pageTitle = __('message.update_form_title',[ 'form' => __('message.riderequest')]);
         $data = RideRequest::findOrFail($id);
-        
+
         return view('riderequest.form', compact('data', 'pageTitle', 'id'));
     }
 
@@ -241,12 +241,12 @@ class RideRequestController extends Controller
             $notify_data->success_type = 'change_payment_type';
             $notify_data->success_message = $message;
             $notify_data->result = new RideRequestResource($riderequest);
-            
+
             dispatch(new NotifyViaMqtt('ride_request_status_'.$riderequest->driver_id, json_encode($notify_data)));
 
             return json_message_response($message);
         }
-        
+
         $history_data = [
             'history_type'      => request('status'),
             'ride_request_id'   => $id,

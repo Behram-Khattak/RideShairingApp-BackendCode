@@ -19,7 +19,7 @@ use App\Models\RideRequestHistory;
 class DispatchController extends Controller
 {
     use RideRequestTrait;
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,9 +44,9 @@ class DispatchController extends Controller
     {
         $data = $request->all();
 
-        // Check if the rider has registred a riderequest already
+        // Check if the rider has registered a rideRequest already
         $rider_exists_riderequest = RideRequest::whereNotIn('status', ['canceled', 'completed'])->where('rider_id', request('rider_id'))->where('is_schedule', 0)->exists();
-        
+
         if($rider_exists_riderequest) {
             return json_custom_response([
                 'message' => __('message.rider_already_in_riderequest'),
@@ -58,7 +58,7 @@ class DispatchController extends Controller
         // Check if the driver in riderequest already
         if( request('driver_id') != null ) {
             $driver_exists_riderequest = RideRequest::whereNotIn('status', ['canceled', 'completed'])->where('driver_id', request('driver_id'))->where('is_schedule', 0)->exists();
-            
+
             if($driver_exists_riderequest) {
                 return json_custom_response([
                     'message' => __('message.driver_already_in_riderequest'),
@@ -67,13 +67,13 @@ class DispatchController extends Controller
                 ]);
             }
         }
-        
+
         $coupon_code = $request->coupon_code;
 
         if( $coupon_code != null ) {
             $coupon = Coupon::where('code', $coupon_code)->first();
             $status = isset($coupon_code) ? 400 : 200;
-        
+
             if($coupon != null) {
                 $status = Coupon::isValidCoupon($coupon);
             }
@@ -112,9 +112,9 @@ class DispatchController extends Controller
         // distance in meter
         $dropoff_distance_in_meters = distance_value_from_distance_matrix($place_details);
         $dropoff_time_in_seconds = duration_value_from_distance_matrix($place_details);
-        
+
         $distance_in_unit = 0;
-        
+
         if ($dropoff_distance_in_meters) {
             // Region->distance_unit == km ( convert meter to km )
             $distance_in_unit = $dropoff_distance_in_meters / 1000;
@@ -177,7 +177,7 @@ class DispatchController extends Controller
         }
         }
         return response()->json(['status' => true, 'event' => 'reset', 'message' => $message]);
-        
+
         // return redirect()->route('riderequest.index')->withSuccess($message);
     }
 }
