@@ -147,35 +147,36 @@ class DispatchController extends Controller
 
             RideRequestHistory::create($history_data);
         } else {
-        if( $result->status == 'new_ride_requested' ) {
+            if( $result->status == 'new_ride_requested' ) {
 
-            $history_data = [
-                'ride_request_id'   => $result->id,
-                'history_type'      => $result->status,
-                'ride_request'      => $result,
-            ];
-            saveRideHistory($history_data);
-            if( $result->riderequest_in_driver_id != null ) {
-                $this->notifyDriverForRide($result);
+                $history_data = [
+                    'ride_request_id'   => $result->id,
+                    'history_type'      => $result->status,
+                    'ride_request'      => $result,
+                ];
+                saveRideHistory($history_data);
+                if( $result->riderequest_in_driver_id != null ) {
+                    $this->notifyDriverForRide($result);
+                } else {
+                    $this->acceptDeclinedRideRequest($result);
+                }
+                $notify_data = new \stdClass();
+                $notify_data->success = true;
+                $notify_data->success_type = $result->status;
+                $notify_data->success_message = __('message.ride.new_ride_requested');
+                $notify_data->result = new RideRequestResource($result);
+                dispatch(new NotifyViaMqtt('new_ride_request_'.$result->rider_id, json_encode($notify_data), $result->rider_id));
             } else {
-                $this->acceptDeclinedRideRequest($result);
-            }
-            $notify_data = new \stdClass();
-            $notify_data->success = true;
-            $notify_data->success_type = $result->status;
-            $notify_data->success_message = __('message.ride.new_ride_requested');
-            $notify_data->result = new RideRequestResource($result);
-            dispatch(new NotifyViaMqtt('new_ride_request_'.$result->rider_id, json_encode($notify_data), $result->rider_id));
-        } else {
-            $history_data = [
-                'history_type'      => $result->status,
-                'ride_request_id'   => $result->id,
-                'ride_request'      => $result,
-            ];
+                $history_data = [
+                    'history_type'      => $result->status,
+                    'ride_request_id'   => $result->id,
+                    'ride_request'      => $result,
+                ];
 
-            saveRideHistory($history_data);
+                saveRideHistory($history_data);
+            }
         }
-        }
+
         return response()->json(['status' => true, 'event' => 'reset', 'message' => $message]);
 
         // return redirect()->route('riderequest.index')->withSuccess($message);

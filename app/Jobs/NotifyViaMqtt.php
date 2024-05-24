@@ -9,7 +9,7 @@ class NotifyViaMqtt
 {
     protected $event;
     protected $message;
-    
+
 
     /**
      * Create a new job instance.
