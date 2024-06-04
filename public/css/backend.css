@@ -3640,7 +3640,12 @@ textarea.form-control.is-invalid {
 .custom-file-input {
     height: calc(1.5em + 1.25rem + 2px);
     position: relative;
-    width: 100%
+    width: 100%;
+    overflow: hidden;
+}
+
+.selected_file {
+    display: none;
 }
 
 .custom-file-input {
