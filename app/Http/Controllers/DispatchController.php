@@ -54,7 +54,6 @@ class DispatchController extends Controller
                 'event' => 'validation',
             ]);
         }
-
         // Check if the driver in riderequest already
         if( request('driver_id') != null ) {
             $driver_exists_riderequest = RideRequest::whereNotIn('status', ['canceled', 'completed'])->where('driver_id', request('driver_id'))->where('is_schedule', 0)->exists();
@@ -155,11 +154,14 @@ class DispatchController extends Controller
                     'ride_request'      => $result,
                 ];
                 saveRideHistory($history_data);
+
                 if( $result->riderequest_in_driver_id != null ) {
                     $this->notifyDriverForRide($result);
+
                 } else {
                     $this->acceptDeclinedRideRequest($result);
                 }
+
                 $notify_data = new \stdClass();
                 $notify_data->success = true;
                 $notify_data->success_type = $result->status;

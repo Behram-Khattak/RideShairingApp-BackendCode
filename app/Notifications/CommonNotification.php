@@ -38,19 +38,19 @@ class CommonNotification extends Notification
      */
     public function via($notifiable)
     {
-        $notifications = []; 
+        $notifications = [];
 
         if( $notifiable->player_id != null ) {
-        if( $notifiable->user_type == 'driver' && env('ONESIGNAL_DRIVER_APP_ID') && env('ONESIGNAL_DRIVER_REST_API_KEY')) 
+        if( $notifiable->user_type == 'driver' && env('ONESIGNAL_DRIVER_APP_ID') && env('ONESIGNAL_DRIVER_REST_API_KEY'))
         {
                 $heading = [
                     'en' => $this->subject,
                 ];
-        
+
                 $content = [
                     'en' => strip_tags($this->notification_message),
                 ];
-                
+
                 $parameters = [
                     'api_key' => env('ONESIGNAL_DRIVER_REST_API_KEY'),
                     'app_id' => env('ONESIGNAL_DRIVER_APP_ID'),
@@ -92,7 +92,7 @@ class CommonNotification extends Notification
         // Log::info('onesignal notifiable'.json_encode($this->data));
         return OneSignalMessage::create()
             ->setSubject($this->subject)
-            ->setBody($msg) 
+            ->setBody($msg)
             ->setData('id',$this->data['id'])
             ->setData('type',$type);
     }

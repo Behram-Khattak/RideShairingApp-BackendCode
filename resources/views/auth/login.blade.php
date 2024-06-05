@@ -37,13 +37,13 @@
                                         <label class="custom-control-label" for="customCheck1">{{ __('message.remember_me') }}</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                {{-- <div class="col-lg-6">
                                     <a href="{{route('auth.recover-password')}}" class="text-primary float-right">{{ __('message.forgot_password') }}</a>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 {{-- <span>{{ __('message.create_an_account') }} <a href="{{route('auth.register')}}" class="text-primary"> {{ __('message.sign_up') }}</a></span> --}}
-                                <button type="submit" class="btn btn-primary">{{ __('message.sign_in') }}</button>
+                                <button type="submit" class="btn btn-primary w-100">{{ __('message.sign_in') }}</button>
                             </div>
                         </form>
                     </div>

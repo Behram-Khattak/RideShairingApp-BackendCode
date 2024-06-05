@@ -18,7 +18,7 @@ trait RideRequestTrait {
         $unit = $ride_request->distance_unit ?? 'km';
         $unit_value = convertUnitvalue($unit);
         $radius = Setting::where('type','DISTANCE')->where('key','DISTANCE_RADIUS')->pluck('value')->first() ?? 50;
-                    
+
         $latitude = $ride_request->start_latitude;
         $longitude = $ride_request->start_longitude;
 
@@ -41,7 +41,7 @@ trait RideRequestTrait {
             });
         }
         $nearby_driver = $nearby_driver->first();
-        
+
         // \Log::info('nearby_driver-'.$nearby_driver);
 
         if( $nearby_driver != null )
@@ -63,14 +63,14 @@ trait RideRequestTrait {
             $notify_data->success_type = $ride_request->status;
             $notify_data->success_message = __('message.ride.new_ride_requested');
             $notify_data->result = new RideRequestResource($ride_request);
-            
+
             $nearby_driver->notify(new CommonNotification($notification_data['type'], $notification_data));
             dispatch(new NotifyViaMqtt('new_ride_request_'.$nearby_driver->id, json_encode($notify_data), $nearby_driver->id));
         } else {
             $data['riderequest_in_driver_id'] = null;
             $data['riderequest_in_datetime'] = null;
         }
-        
+
         $data['cancelled_driver_ids'] = $cancelled_driver_ids;
         // $data['cancelled_driver_ids'] = array_key_exists('cancelled_driver_ids',$request_data) ? $request_data['cancelled_driver_ids'] : null;
         $ride_request->fill($data)->update();
@@ -97,8 +97,9 @@ trait RideRequestTrait {
             $notify_data->success = true;
             $notify_data->success_type = $ride_request->status;
             $notify_data->success_message = __('message.ride.new_ride_requested');
-            $notify_data->result = new RideRequestResource($ride_request);
             
+            $notify_data->result = new RideRequestResource($ride_request);
+
             $nearby_driver->notify(new CommonNotification($notification_data['type'], $notification_data));
             dispatch(new NotifyViaMqtt('new_ride_request_'.$nearby_driver->id, json_encode($notify_data), $nearby_driver->id));
         } else {
