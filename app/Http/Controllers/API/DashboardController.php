@@ -15,20 +15,21 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\RiderDashboardResource;
 use App\Http\Resources\DriverDashboardResource;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
     public function appsetting(Request $request)
     {
         $data['app_setting'] = AppSetting::first();
-        
+
         $data['terms_condition'] = Setting::where('type','terms_condition')->where('key','terms_condition')->first();
         $data['privacy_policy'] = Setting::where('type','privacy_policy')->where('key','privacy_policy')->first();
 
         $data['ride_for_other'] = (int) SettingData('RIDE', 'RIDE_FOR_OTHER') ?? 0;
         $currency_code = SettingData('CURRENCY', 'CURRENCY_CODE') ?? 'USD';
         $currency = currencyArray($currency_code);
-        
+
         $data['currency_setting'] = [
             'name' => $currency['name'] ?? 'United States (US) dollar',
             'symbol' => $currency['symbol'] ?? '$',
@@ -40,7 +41,7 @@ class DashboardController extends Controller
 
     public function adminDashboard(Request $request)
     {
-        
+
         $dashboard_data = $this->commonDashboard($request);
 
         return json_custom_response($dashboard_data);
@@ -68,7 +69,7 @@ class DashboardController extends Controller
         $region = $region->first();
         $data['region'] = isset($region) ? new RegionResource($region) : null;
         $data['app_seeting'] = AppSetting::first();
-        
+
         $data['terms_condition'] = Setting::where('type','terms_condition')->where('key','terms_condition')->first();
         $data['privacy_policy'] = Setting::where('type','privacy_policy')->where('key','privacy_policy')->first();
 
@@ -80,7 +81,7 @@ class DashboardController extends Controller
         $data['ride_for_other'] = (int) SettingData('RIDE', 'RIDE_FOR_OTHER') ?? 0;
         $currency_code = SettingData('CURRENCY', 'CURRENCY_CODE') ?? 'USD';
         $currency = currencyArray($currency_code);
-        
+
         $data['currency_setting'] = [
             'name' => $currency['name'] ?? 'United States (US) dollar',
             'symbol' => $currency['symbol'] ?? '$',
@@ -94,12 +95,15 @@ class DashboardController extends Controller
     {
         $auth_user = auth()->user();
         $user = User::find($auth_user->id);
+
+        Log::debug('on_ride_request_info-driver-auth-user-'.$user);
+
         $response = null;
 
         if($user->hasRole('driver')) {
             $response = new DriverDashboardResource($user);
         } else {
-            $response = new RiderDashboardResource($user);            
+            $response = new RiderDashboardResource($user);
         }
         return json_custom_response($response);
     }
