@@ -98,9 +98,10 @@ class DispatchController extends Controller
 
         if( request()->has('driver_id') && request('driver_id') != null ) {
             $data['riderequest_in_driver_id'] = $data['driver_id'];
+            $data['driver_id'] = $data['driver_id'];
             $data['riderequest_in_datetime'] = $data['datetime'];
 
-            unset($data['driver_id']);
+            // unset($data['driver_id']);
         }
 
         $data['distance_unit'] = $service->region->distance_unit ?? 'km';

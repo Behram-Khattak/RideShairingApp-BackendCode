@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\RideRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Sos;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,11 +12,17 @@ class DriverDashboardResource extends JsonResource
 {
     public function toArray($request)
     {
-        $on_ride_request = $this->driverRideRequestDetail()->whereNotIn('status', ['canceled'])->where('is_driver_rated',false)
+        $on_ride_request = $this->driverRideRequestDetail()
+                        ->whereNotIn('status', ['canceled'])
+                        ->where('is_driver_rated',false)
                         // ->whereHas('payment',function ($q) {
                         //     $q->whereNull('payment_status')->orWhere('payment_status', 'pending');
                         // })
                         ->first();
+
+        // $on_ride_request = RideRequest::whereNotIn('status', ['canceled'])
+        //                 ->where('is_driver_rated', false)
+        //                 ->first();
 
         Log::debug('on_ride_request_info-driver-'.$on_ride_request);
 

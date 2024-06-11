@@ -143,8 +143,8 @@ class User extends Authenticatable implements HasMedia
     }
 
     public function getPayment(){
-        
-        return $this->hasManyThrough( 
+
+        return $this->hasManyThrough(
             Payment::class,
             RideRequest::class,
             'driver_id',
