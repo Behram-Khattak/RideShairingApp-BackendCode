@@ -17,8 +17,8 @@ class RiderDashboardResource extends JsonResource
                         // })
                         ->first();
 
-        Log::debug('on_ride_request_info-'.$on_ride_request);
-        Log::debug('ride_request_info-'.$ride_request);
+        // Log::debug('on_ride_request_info-'.$on_ride_request);
+        // Log::debug('ride_request_info-'.$ride_request);
 
 
         $pending_payment_ride_request = $this->riderRideRequestDetail()->where('status', 'completed')->where('is_rider_rated',true)
@@ -30,10 +30,10 @@ class RiderDashboardResource extends JsonResource
         $driver = isset($on_ride_request) && optional($on_ride_request->driver) ? $on_ride_request->driver : null;
         $payment = isset($pending_payment_ride_request) && optional($pending_payment_ride_request->payment) ? $pending_payment_ride_request->payment : null;
 
-        Log::debug('driver-'.$driver);
+        // Log::debug('driver-'.$driver);
 
         $is_rider_rated = isset($on_ride_request) ? $on_ride_request->rideRequestRating()->where('driver_id', $on_ride_request->driver_id)->first() : null;
-        Log::debug('is_rider_rated-'.$is_rider_rated);
+        // Log::debug('is_rider_rated-'.$is_rider_rated);
 
         return [
             'id'                => $this->id,

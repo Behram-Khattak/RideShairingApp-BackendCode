@@ -96,7 +96,7 @@ class DashboardController extends Controller
         $auth_user = auth()->user();
         $user = User::find($auth_user->id);
 
-        Log::debug('on_ride_request_info-driver-auth-user-'.$user);
+        // Log::debug('on_ride_request_info-driver-auth-user-'.$user);
 
         $response = null;
 
