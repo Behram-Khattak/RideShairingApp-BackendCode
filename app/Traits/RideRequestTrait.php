@@ -47,6 +47,7 @@ trait RideRequestTrait {
         if( $nearby_driver != null )
         {
             $data['riderequest_in_driver_id'] = $nearby_driver->id;
+            $data['driver_id'] = $nearby_driver->id;
             $data['riderequest_in_datetime'] = Carbon::now()->format('Y-m-d H:i:s');
             $notification_data = [
                 'id' => $ride_request->id,
@@ -97,7 +98,7 @@ trait RideRequestTrait {
             $notify_data->success = true;
             $notify_data->success_type = $ride_request->status;
             $notify_data->success_message = __('message.ride.new_ride_requested');
-            
+
             $notify_data->result = new RideRequestResource($ride_request);
 
             $nearby_driver->notify(new CommonNotification($notification_data['type'], $notification_data));
