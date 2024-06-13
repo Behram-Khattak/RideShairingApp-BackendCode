@@ -135,8 +135,8 @@ class RideRequestController extends Controller
             $riderequest->status = 'accepted';
             $riderequest->max_time_for_find_driver_for_ride_request = 0;
             $riderequest->otp = rand(1000, 9999);
-            $riderequest->riderequest_in_driver_id = null;
-            $riderequest->riderequest_in_datetime = null;
+            // $riderequest->riderequest_in_driver_id = null;
+            // $riderequest->riderequest_in_datetime = null;
             $riderequest->save();
             $result = $riderequest;
 
