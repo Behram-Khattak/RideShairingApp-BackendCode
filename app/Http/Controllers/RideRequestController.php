@@ -132,11 +132,12 @@ class RideRequestController extends Controller
         }
         if( request()->has('is_accept') && request('is_accept') == 1 ) {
             $riderequest->driver_id = request('driver_id');
+            $riderequest->riderequest_in_driver_id = request('driver_id');
             $riderequest->status = 'accepted';
             $riderequest->max_time_for_find_driver_for_ride_request = 0;
             $riderequest->otp = rand(1000, 9999);
             // $riderequest->riderequest_in_driver_id = null;
-            // $riderequest->riderequest_in_datetime = null;
+            $riderequest->riderequest_in_datetime = request('datetime');
             $riderequest->save();
             $result = $riderequest;
 
