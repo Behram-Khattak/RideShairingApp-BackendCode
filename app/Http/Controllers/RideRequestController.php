@@ -15,6 +15,7 @@ use App\Traits\RideRequestTrait;
 use App\Jobs\NotifyViaMqtt;
 use App\Http\Resources\RideRequestResource;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Log;
 
 class RideRequestController extends Controller
 {
@@ -84,6 +85,8 @@ class RideRequestController extends Controller
         $service = Service::with('region')->where('id',$request->service_id)->first();
         $data['distance_unit'] = $service->region->distance_unit ?? 'km';
 
+        // Log::debug($data);
+
         $result = RideRequest::create($data);
 
         $message = __('message.save_form', ['form' => __('message.riderequest')]);
@@ -96,6 +99,7 @@ class RideRequestController extends Controller
                 'ride_request'      => $result,
             ];
             saveRideHistory($history_data);
+            // Log::debug($result, $request->all());
             $this->acceptDeclinedRideRequest($result,$request->all());
         } else {
             $history_data = [

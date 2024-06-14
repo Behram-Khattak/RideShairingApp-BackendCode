@@ -10,6 +10,7 @@ use App\Notifications\CommonNotification;
 use App\Jobs\NotifyViaMqtt;
 use App\Http\Resources\RideRequestResource;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 trait RideRequestTrait {
 
@@ -22,27 +23,30 @@ trait RideRequestTrait {
         $latitude = $ride_request->start_latitude;
         $longitude = $ride_request->start_longitude;
 
-        $unit_value = convertUnitvalue($unit);
+        // $unit_value = convertUnitvalue($unit);
         $cancelled_driver_ids = [];
         $cancelled_driver_ids = $ride_request->cancelled_driver_ids;
         if( request()->has('is_accept') && request('is_accept') == 0 ) {
             array_push($cancelled_driver_ids, auth()->user()->id);
         }
         $minumum_amount_get_ride = SettingData('wallet', 'min_amount_to_get_ride') ?? null;
+
         $nearby_driver = User::selectRaw("id, user_type, player_id, latitude, longitude, ( $unit_value * acos( cos( radians($latitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($longitude) ) + sin( radians($latitude) ) * sin( radians( latitude ) ) ) ) AS distance")
                         ->where('user_type', 'driver')->where('status', 'active')->where('is_online',1)->where('is_available',1)
                         ->where('service_id', $ride_request->service_id )
                         ->whereNotIn('id', $cancelled_driver_ids)
                         ->having('distance', '<=', $radius)
                         ->orderBy('distance','asc');
+
         if( $minumum_amount_get_ride != null ) {
             $nearby_driver = $nearby_driver->whereHas('userWallet', function($q) use($minumum_amount_get_ride) {
                 $q->where('total_amount', '>=', $minumum_amount_get_ride);
             });
         }
+
         $nearby_driver = $nearby_driver->first();
 
-        // \Log::info('nearby_driver-'.$nearby_driver);
+        // Log::info('nearby_driver-'.$nearby_driver);
 
         if( $nearby_driver != null )
         {
