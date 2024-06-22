@@ -263,7 +263,7 @@
     @section('bottom_script')
         <script>
             var cash_yearly = [ {{ implode ( ',' , $data['cash_yearly'] ) }} ];
-            // var wallet_yearly = [ {{ implode ( ',' , $data['wallet_yearly'] ) }} ];
+            var wallet_yearly = [ {{ implode ( ',' , $data['wallet_yearly'] ) }} ];
 
             var options = {
                 series: [
@@ -271,10 +271,10 @@
                         name: "{{ __('message.cash') }}",
                         data: cash_yearly
                     },
-                    // {
-                    //     name: "{{ __('message.wallet') }}",
-                    //     data: wallet_yearly
-                    // }
+                    {
+                        name: "{{ __('message.wallet') }}",
+                        data: wallet_yearly
+                    }
                 ],
                 chart: {
                     type: 'bar',

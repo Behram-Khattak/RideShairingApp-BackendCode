@@ -35,9 +35,9 @@
                                     <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=mobile-config" data-target=".paste_here" class="nav-link {{$page=='mobile-config'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.mobile_config') }}</a>
                                     </li>
-                                    {{-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=wallet-setting" data-target=".paste_here" class="nav-link {{$page=='wallet-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.wallet_setting') }}</a>
-                                    </li> --}}
+                                    </li>
                                     {{-- <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=ride-setting" data-target=".paste_here" class="nav-link {{$page=='ride-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('message.ride_setting') }}</a>
                                     </li>

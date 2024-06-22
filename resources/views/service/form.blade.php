@@ -86,8 +86,8 @@
 
                                 <div class="form-group col-md-4">
                                     {{ Form::label('payment_method',__('message.payment_method').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
-                                    {{ Form::select('payment_method',[ 'cash' => __('message.cash') ], old('payment_method') ,[ 'class' =>'form-control select2js','required']) }}
-                                    {{-- {{ Form::select('payment_method',[ 'cash' => __('message.cash') ,'wallet' => __('message.wallet') , 'cash_wallet' => __('message.cash_wallet') ], old('payment_method') ,[ 'class' =>'form-control select2js','required']) }} --}}
+                                    {{-- {{ Form::select('payment_method',[ 'cash' => __('message.cash') ], old('payment_method') ,[ 'class' =>'form-control select2js','required']) }} --}}
+                                    {{ Form::select('payment_method',[ 'cash' => __('message.cash') ,'wallet' => __('message.wallet') , 'cash_wallet' => __('message.cash_wallet') ], old('payment_method') ,[ 'class' =>'form-control select2js','required']) }}
                                 </div>
 
                                 <div class="form-group col-md-4">
