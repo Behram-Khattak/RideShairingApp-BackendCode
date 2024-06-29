@@ -6,3 +6,6 @@
 .env
 .env.backup
 .phpunit.result.cache
+alter-mightytaxi.sql
+mightytaxi.sql
+old-mightytaxi.sql
