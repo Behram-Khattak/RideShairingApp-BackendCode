@@ -180,7 +180,7 @@ class UserController extends Controller
         $id = $request->id;
 
         $user = User::where('id',$id)->first();
-
+        
         if(empty($user))
         {
             $message = __('message.user_not_found');
