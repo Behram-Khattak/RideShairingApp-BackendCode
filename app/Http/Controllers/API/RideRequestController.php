@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\Payment;
 use App\Jobs\NotifyViaMqtt;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 class RideRequestController extends Controller
@@ -301,7 +302,22 @@ class RideRequestController extends Controller
         $data['driver_id'] = auth()->user()->user_type == 'rider' ? $ride_request->driver_id : null;
 
         $data['rating_by'] = auth()->user()->user_type;
-        RideRequestRating::updateOrCreate([ 'id' => $request->id ], $data);
+        // assigned the object to a variable
+        $checkRideRequestRating = new RideRequestRating();
+
+        $rideRequestRating = $checkRideRequestRating->where('id', $request->id)->first();
+    //    $rideRequestRating =  RideRequestRating::updateOrCreate([ 'id' => $request->id ], $data);
+
+        // check if the record already exists in the database, if it does, update it, else, create a new one
+        if ($rideRequestRating) {
+            $checkRideRequestRating->update($data);
+        } else {
+            $checkRideRequestRating->create($data);
+        }
+
+        // Log::debug($checkRideRequestRating->get());
+        // exit;
+        // RideRequestRating::updateOrCreate([ 'id' => $request->id ], $data);
 
         if(auth()->user()->hasRole('rider')) {
             $ride_request->update(['is_rider_rated' => true]);
@@ -311,7 +327,8 @@ class RideRequestController extends Controller
             $ride_request->update(['is_driver_rated' => true]);
             $msg = __('message.rated_successfully', ['form' => __('message.driver')]);
         }
-        if($ride_request->payment->payment_status == 'pending' && $request->has('tips') && request('tips') != null) {
+
+        if($request->has('tips') && request('tips') != null) {
             $ride_request->update(['tips' => request('tips')]);
         }
 
@@ -320,6 +337,9 @@ class RideRequestController extends Controller
         $notify_data->success_type = 'rating';
         $notify_data->success_message = $msg;
         $notify_data->result = new RideRequestResource($ride_request);
+
+        // Log::debug('data comming here');
+        // exit;
 
         if( auth()->user()->hasRole('driver') ) {
             dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, json_encode($notify_data)));

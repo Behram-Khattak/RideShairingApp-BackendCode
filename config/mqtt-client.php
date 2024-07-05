@@ -94,7 +94,7 @@ return [
 
                 // The timeouts (in seconds) used for the connection. Some of these settings
                 // are only relevant when using the event loop of the MQTT client.
-                'connect_timeout' => env('MQTT_CONNECT_TIMEOUT', 60),
+                'connect_timeout' => env('MQTT_CONNECT_TIMEOUT', 100),
                 'socket_timeout' => env('MQTT_SOCKET_TIMEOUT', 5),
                 'resend_timeout' => env('MQTT_RESEND_TIMEOUT', 10),
 
