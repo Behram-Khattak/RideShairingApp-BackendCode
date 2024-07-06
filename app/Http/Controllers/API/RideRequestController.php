@@ -336,20 +336,19 @@ class RideRequestController extends Controller
         $notify_data->success = true;
         $notify_data->success_type = 'rating';
         $notify_data->success_message = $msg;
-        // $notify_data->result = new RideRequestResource($ride_request);
+        $notify_data->result = new RideRequestResource($ride_request);
 
         // $checkClass = json_encode($notify_data);
 
         // Log::debug($checkClass);
         // exit;
-        $check = "";
 
         if( auth()->user()->hasRole('driver') ) {
-            dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, $check));
+            dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, json_encode($notify_data)));
         }
 
         if( auth()->user()->hasRole('rider') ) {
-            dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->driver_id, $check));
+            dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->driver_id, json_encode($notify_data)));
         }
 
         $message = __('message.save_form',[ 'form' => __('message.rating') ] );
