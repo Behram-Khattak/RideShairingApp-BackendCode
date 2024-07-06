@@ -340,14 +340,14 @@ class RideRequestController extends Controller
 
         // $checkClass = json_encode($notify_data);
 
-        // Log::debug($checkClass);
+        // Log::debug(auth()->user()->user_type);
         // exit;
 
-        if( auth()->user()->hasRole('driver') ) {
+        if( auth()->user()->user_type === "driver" ) {
             dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, json_encode($notify_data)));
         }
 
-        if( auth()->user()->hasRole('rider') ) {
+        if( auth()->user()->user_type === "rider" ) {
             dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->driver_id, json_encode($notify_data)));
         }
 
