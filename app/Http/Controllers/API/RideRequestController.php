@@ -338,7 +338,9 @@ class RideRequestController extends Controller
         $notify_data->success_message = $msg;
         $notify_data->result = new RideRequestResource($ride_request);
 
-        // Log::debug('data comming here');
+        // $checkClass = json_encode($notify_data);
+
+        // Log::debug($checkClass);
         // exit;
 
         if( auth()->user()->hasRole('driver') ) {
