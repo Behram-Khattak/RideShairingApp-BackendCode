@@ -13,7 +13,6 @@ use Carbon\Carbon;
 use App\Models\Payment;
 use App\Jobs\NotifyViaMqtt;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Validator;
 
@@ -307,7 +306,6 @@ class RideRequestController extends Controller
         $checkRideRequestRating = new RideRequestRating();
 
         $rideRequestRating = $checkRideRequestRating->where('id', $request->id)->first();
-    //    $rideRequestRating =  RideRequestRating::updateOrCreate([ 'id' => $request->id ], $data);
 
         // check if the record already exists in the database, if it does, update it, else, create a new one
         if ($rideRequestRating) {
@@ -315,10 +313,6 @@ class RideRequestController extends Controller
         } else {
             $checkRideRequestRating->create($data);
         }
-
-        // Log::debug($checkRideRequestRating->get());
-        // exit;
-        // RideRequestRating::updateOrCreate([ 'id' => $request->id ], $data);
 
         if(auth()->user()->hasRole('rider')) {
             $ride_request->update(['is_rider_rated' => true]);
@@ -339,19 +333,12 @@ class RideRequestController extends Controller
         $notify_data->success_message = $msg;
         $notify_data->result = new RideRequestResource($ride_request);
 
-        // $checkClass = json_encode($notify_data);
-
-        // Log::debug(auth()->user()->user_type);
-        // exit;
-
-        $queue = new Queue();
-
         if( auth()->user()->hasRole("driver") ) {
-           $queue->push(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, json_encode($notify_data)));
+           Queue::push(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, json_encode($notify_data)));
         }
 
         if( auth()->user()->hasRole("rider") ) {
-            $queue->push(new NotifyViaMqtt('ride_request_status_'.$ride_request->driver_id, json_encode($notify_data)));
+            Queue::push(new NotifyViaMqtt('ride_request_status_'.$ride_request->driver_id, json_encode($notify_data)));
         }
 
         $message = __('message.save_form',[ 'form' => __('message.rating') ] );
