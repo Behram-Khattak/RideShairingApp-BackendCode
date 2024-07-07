@@ -14,6 +14,7 @@ use App\Models\Payment;
 use App\Jobs\NotifyViaMqtt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Queue;
 use Validator;
 
 class RideRequestController extends Controller
@@ -343,12 +344,14 @@ class RideRequestController extends Controller
         // Log::debug(auth()->user()->user_type);
         // exit;
 
-        if( auth()->user()->user_type === "driver" ) {
-            dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, json_encode($notify_data)));
+        $queue = new Queue();
+
+        if( auth()->user()->hasRole("driver") ) {
+           $queue->push(new NotifyViaMqtt('ride_request_status_'.$ride_request->rider_id, json_encode($notify_data)));
         }
 
-        if( auth()->user()->user_type === "rider" ) {
-            dispatch(new NotifyViaMqtt('ride_request_status_'.$ride_request->driver_id, json_encode($notify_data)));
+        if( auth()->user()->hasRole("rider") ) {
+            $queue->push(new NotifyViaMqtt('ride_request_status_'.$ride_request->driver_id, json_encode($notify_data)));
         }
 
         $message = __('message.save_form',[ 'form' => __('message.rating') ] );
