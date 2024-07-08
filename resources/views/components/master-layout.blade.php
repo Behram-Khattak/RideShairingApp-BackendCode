@@ -14,6 +14,9 @@
                 font-weight: bold;
                 font-size: 1.5rem;
             }
+            .admin-profile-icon {
+                color: #048484;
+            }
         </style>
 
     </head>
