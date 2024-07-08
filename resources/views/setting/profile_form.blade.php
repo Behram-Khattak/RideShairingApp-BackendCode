@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="row ">
 		<div class="col-md-3">
-			<div class="user-sidebar">
+			{{-- <div class="user-sidebar">
 				<div class="user-body user-profile text-center">
 					<div class="user-img">
 						<img class="rounded-circle avatar-100 image-fluid profile_image_preview" src="{{ getSingleMedia($user_data,'profile_image', null) }}" alt="profile-pic">
@@ -10,9 +10,9 @@
 						<span class="mb-2">{{ $user_data->display_name }}</span>
 					</div>
 				</div>
-			</div>
+			</div> --}}
 		</div>
-		<div class="col-md-9">
+		<div class="col-12">
 			<div class="user-content">
 				{{ Form::model($user_data, ['route'=>'updateProfile','method' => 'POST','data-toggle'=>"validator" , 'enctype'=> 'multipart/form-data','id' => 'user-form']) }}
 					<input type="hidden" name="profile" value="profile">
@@ -20,17 +20,17 @@
 					{{ Form::hidden('email') }}
 				    {{ Form::hidden('id', null, [ 'placeholder' => 'id','class' => 'form-control' ]) }}
 				    <div class="row ">
-				        
+
 						<div class="form-group col-md-6">
 							{{ Form::label('first_name',__('message.first_name').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
 							{{ Form::text('first_name',old('first_name'),['placeholder' => __('message.first_name'),'class' =>'form-control','required']) }}
 						</div>
-						
+
 						<div class="form-group col-md-6">
 							{{ Form::label('last_name',__('message.last_name').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
 							{{ Form::text('last_name',old('last_name'),['placeholder' => __('message.last_name'),'class' =>'form-control','required']) }}
 						</div>
-						
+
 						<div class="form-group col-md-6">
 							{{ Form::label('username',__('message.username').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
 							{{ Form::text('username',old('username'),['placeholder' => __('message.username'),'class' =>'form-control','required']) }}
@@ -46,17 +46,17 @@
 							{{ Form::text('contact_number', old('contact_number'),[ 'placeholder' => __('message.contact_number'), 'class' => 'form-control', 'id' => 'phone' ]) }}
 						</div>
 
-				        <div class="form-group col-md-6">
+				        {{-- <div class="form-group col-md-6">
 							{{ Form::label('profile_image',__('message.choose_profile_image'),['class'=>'form-control-label col-md-12'] ) }}
 							<div class="custom-file">
 								{{ Form::file('profile_image', ['class'=>"custom-file-input custom-file-input-sm detail" , 'id'=>"profile_image" , 'lang'=>"en" , 'accept'=>"image/*"]) }}
 								<label class="custom-file-label" id="imagelabel" for="profile_image">{{ __('message.profile_image') }}</label>
-							</div> 
-				        </div>
+							</div>
+				        </div> --}}
 
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-6">
 							{{ Form::label('address',__('message.address'), ['class' => 'form-control-label']) }}
-							{{ Form::textarea('address', null, ['class'=>"form-control textarea" , 'rows'=>3  , 'placeholder'=> __('message.address') ]) }}
+							{{ Form::text('address', old('address'), ['class'=>"form-control"  , 'placeholder'=> __('message.address') ]) }}
 						</div>
 				        <div class="col-md-12">
 							{{ Form::submit(__('message.update'), ['class'=>"btn btn-md btn-primary float-md-right"]) }}
@@ -69,7 +69,7 @@
 
 <script>
 	$(document).ready(function (){
-				
+
         $(document).on('change','#profile_image',function(){
 			readURL(this);
 		})
@@ -111,7 +111,7 @@
 			return false;
 		}
 
-		var input = document.querySelector("#phone"), 
+		var input = document.querySelector("#phone"),
 		errorMsg = document.querySelector("#error-msg"),
 		validMsg = document.querySelector("#valid-msg");
 

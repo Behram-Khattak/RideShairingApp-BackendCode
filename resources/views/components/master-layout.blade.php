@@ -6,8 +6,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        
+
         @include('partials._head')
+
+        <style>
+            .driver-status-label {
+                font-weight: bold;
+                font-size: 1.5rem;
+            }
+        </style>
 
     </head>
     <body class="" id="app">

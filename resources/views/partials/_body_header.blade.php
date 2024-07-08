@@ -105,7 +105,8 @@
                         </li> --}}
                         <li class="nav-item nav-icon dropdown">
                             <a href="#" class="nav-item nav-icon dropdown-toggle pr-0 search-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <img src="{{ getSingleMedia( auth()->user(), 'profile_image', null) }}" class="img-fluid avatar-rounded user-avatar-image" alt="user">
+                                {{-- <img src="{{ getSingleMedia( auth()->user(), 'profile_image', null) }}" class="img-fluid avatar-rounded user-avatar-image" alt="user"> --}}
+                                <i class="far fa-user fa-2x"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <li class="dropdown-item d-flex ">

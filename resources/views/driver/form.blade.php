@@ -7,64 +7,66 @@
             {!! Form::open(['route' => ['driver.store'], 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
         @endif
         <div class="row">
-            <div class="col-xl-3 col-lg-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <div class="header-title">
-                            <h4 class="card-title">{{ $pageTitle }}</h4>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="crm-profile-img-edit position-relative">
-                                <img src="{{ $profileImage ?? asset('images/user/1.jpg')}}" alt="User-Profile" class="crm-profile-pic rounded-circle avatar-100">
-                                <div class="crm-p-image bg-primary">
-                                    <svg class="upload-button" width="14" height="14" viewBox="0 0 24 24">
-                                        <path fill="#ffffff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" />
-                                    </svg>
-                                    <input class="file-upload" type="file" accept="image/*" name="profile_image">
-                                </div>
+            <div class="col-12">
+                {{-- profile picture section --}}
+                {{-- <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+                                <h4 class="card-title">{{ $pageTitle }}</h4>
                             </div>
-                            <div class="img-extension mt-3">
-                                <div class="d-inline-block align-items-center">
-                                    <span>{{ __('message.only') }}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="crm-profile-img-edit position-relative">
+                                    <img src="{{ $profileImage ?? asset('images/user/1.jpg')}}" alt="User-Profile" class="crm-profile-pic rounded-circle avatar-100">
+                                    <div class="crm-p-image bg-primary">
+                                        <svg class="upload-button" width="14" height="14" viewBox="0 0 24 24">
+                                            <path fill="#ffffff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" />
+                                        </svg>
+                                        <input class="file-upload" type="file" accept="image/*" name="profile_image">
+                                    </div>
+                                </div>
+                                <div class="img-extension mt-3">
+                                    <div class="d-inline-block align-items-center">
+                                        <span>{{ __('message.only') }}</span>
 
-                                    @foreach(config('constant.IMAGE_EXTENTIONS') as $extention)
-                                        <a href="javascript:void();">.{{ $extention }}</a>
-                                    @endforeach
-                                    <span>{{ __('message.allowed') }}</span>
+                                        @foreach(config('constant.IMAGE_EXTENTIONS') as $extention)
+                                            <a href="javascript:void();">.{{ $extention }}</a>
+                                        @endforeach
+                                        <span>{{ __('message.allowed') }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">{{ __('message.status') }}</label>
-                            <div class="grid" style="--bs-gap: 1rem">
-                                <div class="form-check g-col-6">
-                                    {{ Form::radio('status', 'active' , old('status') || true, ['class' => 'form-check-input', 'id' => 'status-active' ]) }}
-                                    {{ Form::label('status-active', __('message.active'), ['class' => 'form-check-label' ]) }}
-                                </div>
-                                <div class="form-check g-col-6">
-                                    {{ Form::radio('status', 'inactive', old('status') , ['class' => 'form-check-input', 'id' => 'status-inactive' ]) }}
-                                    {{ Form::label('status-inactive', __('message.inactive'), ['class' => 'form-check-label' ]) }}
-                                </div>
-                                <div class="form-check g-col-6">
-                                    {{ Form::radio('status', 'pending', old('status') , ['class' => 'form-check-input', 'id' => 'status-pending' ]) }}
-                                    {{ Form::label('status-pending', __('message.pending'), ['class' => 'form-check-label' ]) }}
-                                </div>
-                                <div class="form-check g-col-6">
-                                    {{ Form::radio('status', 'banned', old('status') , ['class' => 'form-check-input', 'id' => 'status-banned' ]) }}
-                                    {{ Form::label('status-banned', __('message.banned'), ['class' => 'form-check-label' ]) }}
-                                </div>
-                                <div class="form-check g-col-6">
-                                    {{ Form::radio('status', 'reject', old('status') , ['class' => 'form-check-input', 'id' => 'status-reject' ]) }}
-                                    {{ Form::label('status-reject', __('message.reject'), ['class' => 'form-check-label' ]) }}
+                            <div class="form-group">
+                                <label class="form-label">{{ __('message.status') }}</label>
+                                <div class="grid" style="--bs-gap: 1rem">
+                                    <div class="form-check g-col-6">
+                                        {{ Form::radio('status', 'active' , old('status') || true, ['class' => 'form-check-input', 'id' => 'status-active' ]) }}
+                                        {{ Form::label('status-active', __('message.active'), ['class' => 'form-check-label' ]) }}
+                                    </div>
+                                    <div class="form-check g-col-6">
+                                        {{ Form::radio('status', 'inactive', old('status') , ['class' => 'form-check-input', 'id' => 'status-inactive' ]) }}
+                                        {{ Form::label('status-inactive', __('message.inactive'), ['class' => 'form-check-label' ]) }}
+                                    </div>
+                                    <div class="form-check g-col-6">
+                                        {{ Form::radio('status', 'pending', old('status') , ['class' => 'form-check-input', 'id' => 'status-pending' ]) }}
+                                        {{ Form::label('status-pending', __('message.pending'), ['class' => 'form-check-label' ]) }}
+                                    </div>
+                                    <div class="form-check g-col-6">
+                                        {{ Form::radio('status', 'banned', old('status') , ['class' => 'form-check-input', 'id' => 'status-banned' ]) }}
+                                        {{ Form::label('status-banned', __('message.banned'), ['class' => 'form-check-label' ]) }}
+                                    </div>
+                                    <div class="form-check g-col-6">
+                                        {{ Form::radio('status', 'reject', old('status') , ['class' => 'form-check-input', 'id' => 'status-reject' ]) }}
+                                        {{ Form::label('status-reject', __('message.reject'), ['class' => 'form-check-label' ]) }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-xl-9 col-lg-8">
+                </div> --}}
+
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
@@ -74,7 +76,68 @@
                             <a href="{{route('driver.index')}}" class="btn btn-sm btn-primary" role="button">{{ __('message.back') }}</a>
                         </div>
                     </div>
+                    {{--  --}}
                     <div class="card-body">
+                        <div class="driver-profile-info d-sm-flex d-block justify-content-between align-items-center border-bottom mb-5">
+                            <div class="form-group">
+                                <div class="crm-profile-img-edit position-relative">
+                                    <img src="{{ $profileImage ?? asset('images/user/1.jpg')}}" alt="User-Profile" class="crm-profile-pic rounded-circle avatar-100">
+                                    <div class="crm-p-image bg-primary">
+                                        <svg class="upload-button" width="14" height="14" viewBox="0 0 24 24">
+                                            <path fill="#ffffff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" />
+                                        </svg>
+                                        <input class="file-upload" type="file" accept="image/*" name="profile_image">
+                                    </div>
+                                </div>
+                                <div class="img-extension mt-3">
+                                    <div class="d-inline-block align-items-center">
+                                        <span>{{ __('message.only') }}</span>
+
+                                        @foreach(config('constant.IMAGE_EXTENTIONS') as $extention)
+                                            <a href="javascript:void();">.{{ $extention }}</a>
+                                        @endforeach
+                                        <span>{{ __('message.allowed') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- driver verification inputs --}}
+                            <div class="form-group">
+                                <label class="form-label driver-status-label">{{ __('message.driver').' '.__('message.status') }}</label>
+                                <div class="row px-3">
+                                    <div class="form-check border mb-3 rounded mr-3 col-sm-3 col-lg-2">
+                                        <div class="p-2">
+                                            {{ Form::radio('status', 'active' , old('status') || true, ['class' => 'form-check-input', 'id' => 'status-active' ]) }}
+                                            {{ Form::label('status-active', __('message.active'), ['class' => 'form-check-label' ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-check border mb-3 rounded mr-3 col-sm-3 col-lg-2">
+                                        <div class="p-2">
+                                            {{ Form::radio('status', 'inactive', old('status') , ['class' => 'form-check-input', 'id' => 'status-inactive' ]) }}
+                                            {{ Form::label('status-inactive', __('message.inactive'), ['class' => 'form-check-label' ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-check border mb-3 rounded mr-3 col-sm-3 col-lg-2">
+                                        <div class="p-2">
+                                            {{ Form::radio('status', 'pending', old('status') , ['class' => 'form-check-input', 'id' => 'status-pending' ]) }}
+                                            {{ Form::label('status-pending', __('message.pending'), ['class' => 'form-check-label' ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-check border mb-3 rounded mr-3 col-sm-3 col-lg-2">
+                                        <div class="p-2">
+                                            {{ Form::radio('status', 'banned', old('status') , ['class' => 'form-check-input', 'id' => 'status-banned' ]) }}
+                                            {{ Form::label('status-banned', __('message.banned'), ['class' => 'form-check-label' ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-check border mb-3 rounded mr-3 col-sm-3 col-lg-2">
+                                        <div class="p-2">
+                                            {{ Form::radio('status', 'reject', old('status') , ['class' => 'form-check-input', 'id' => 'status-reject' ]) }}
+                                            {{ Form::label('status-reject', __('message.reject'), ['class' => 'form-check-label' ]) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--  --}}
                         <div class="new-user-info">
                             <div class="row">
                                 <div class="form-group col-md-6">
@@ -86,7 +149,7 @@
                                     {{ Form::label('last_name',__('message.last_name').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('last_name',old('last_name'),['placeholder' => __('message.last_name'),'class' =>'form-control','required']) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-6">
                                     {{ Form::label('email',__('message.email').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::email('email', old('email'), [ 'placeholder' => __('message.email'), 'class' => 'form-control', 'required' ]) }}
@@ -129,7 +192,7 @@
 
                                  <!-- Service List -->
                                 <div class="form-group col-md-6">
-                                    {{ Form::label('service_id', __('message.select_name',[ 'select' => __('message.service') ]),[ 'class' => 'form-control-label' ]) }} 
+                                    {{ Form::label('service_id', __('message.select_name',[ 'select' => __('message.service') ]),[ 'class' => 'form-control-label' ]) }}
                                     {{ Form::select('service_id', isset($id) ? [ optional($data->service)->id => optional($data->service)->name ] : [], old('service_id'), [
                                             'class' => 'select2js form-group service',
                                             'data-placeholder' => __('message.select_name',[ 'select' => __('message.service') ]),
@@ -159,12 +222,12 @@
                                     {{ Form::label('car_color',__('message.car_color').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('userDetail[car_color]', old('userDetail[car_color]'), ['class' => 'form-control', 'placeholder' => __('message.car_color')]) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-6">
                                     {{ Form::label('car_plate_number',__('message.car_plate_number').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('userDetail[car_plate_number]', old('userDetail[car_plate_number]'), ['class' => 'form-control', 'placeholder' => __('message.car_plate_number')]) }}
                                 </div>
-                                
+
                                 <div class="form-group col-md-6">
                                     {{ Form::label('car_production_year',__('message.car_production_year').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('userDetail[car_production_year]', old('userDetail[car_production_year]'), ['class' => 'form-control', 'placeholder' => __('message.car_production_year')]) }}
