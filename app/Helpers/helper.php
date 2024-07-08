@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Http;
 use App\Jobs\NotifyViaMqtt;
 use App\Http\Resources\RideRequestResource;
 use App\Models\Document;
+use Illuminate\Support\Facades\Queue;
 
 function authSession($force = false) {
     $session = new User;
@@ -271,13 +272,13 @@ function saveRideHistory($data)
                 }
 
                 if ( $send != 'admin' && $data['history_type'] != 'new_ride_requested') {
-                    dispatch(new NotifyViaMqtt($mqtt_event.'_'.$user->id, json_encode($notify_data)));
+                   Queue::push(new NotifyViaMqtt($mqtt_event.'_'.$user->id, json_encode($notify_data)));
                 }
             }
 
             if( $user == null && isset($ride_request->riderequest_in_driver_id) && $ride_request->riderequest_in_driver != null && $data['history_type'] == 'canceled' ) {
                 $ride_request->riderequest_in_driver->notify(new CommonNotification($notification_data['type'], $notification_data));
-                dispatch(new NotifyViaMqtt($mqtt_event.'_'.$ride_request->riderequest_in_driver_id, json_encode($notify_data) ));
+               Queue::push(new NotifyViaMqtt($mqtt_event.'_'.$ride_request->riderequest_in_driver_id, json_encode($notify_data) ));
                 $ride_request->update([
                     'riderequest_in_driver_id' => null,
                     'riderequest_in_datetime' => null

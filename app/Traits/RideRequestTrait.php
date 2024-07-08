@@ -11,6 +11,7 @@ use App\Jobs\NotifyViaMqtt;
 use App\Http\Resources\RideRequestResource;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Queue;
 
 trait RideRequestTrait {
 
@@ -70,7 +71,7 @@ trait RideRequestTrait {
             $notify_data->result = new RideRequestResource($ride_request);
 
             $nearby_driver->notify(new CommonNotification($notification_data['type'], $notification_data));
-            dispatch(new NotifyViaMqtt('new_ride_request_'.$nearby_driver->id, json_encode($notify_data), $nearby_driver->id));
+           Queue::push(new NotifyViaMqtt('new_ride_request_'.$nearby_driver->id, json_encode($notify_data)));
         } else {
             $data['riderequest_in_driver_id'] = null;
             $data['riderequest_in_datetime'] = null;
@@ -106,7 +107,7 @@ trait RideRequestTrait {
             $notify_data->result = new RideRequestResource($ride_request);
 
             $nearby_driver->notify(new CommonNotification($notification_data['type'], $notification_data));
-            dispatch(new NotifyViaMqtt('new_ride_request_'.$nearby_driver->id, json_encode($notify_data), $nearby_driver->id));
+           Queue::push(new NotifyViaMqtt('new_ride_request_'.$nearby_driver->id, json_encode($notify_data)));
         } else {
             $data['riderequest_in_driver_id'] = null;
             $data['riderequest_in_datetime'] = null;

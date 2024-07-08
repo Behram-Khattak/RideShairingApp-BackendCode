@@ -1,7 +1,7 @@
 <script>
 (function($) {
     'use strict';
-    
+
     $(document).ready(function(){
         $('.select2js').select2();
         $.ajaxSetup({
@@ -32,13 +32,13 @@
                 plugins: [new rangePlugin({ input: '#end_date' })],
             });
         }
-        
+
         if($('.min-datepicker').length > 0){
             flatpickr('.min-datepicker', {
                 minDate: 'today',
             });
         }
-        
+
         $(document).on('click', '.loadRemoteModel', function(e) {
             e.preventDefault();
             var url = $(this).attr('href');
@@ -109,7 +109,7 @@
         $(document).on('change','.change_status', function() {
 
             var status = $(this).prop('checked') == true ? 1 : 0;
-            
+
             var key_name = $(this).attr('data-name');
             var id = $(this).attr('data-id');
             var type = $(this).attr('data-type');
@@ -132,7 +132,7 @@
             var selectDiv = this;
             ajaxMethodCall(selectDiv);
         });
-        
+
         function ajaxMethodCall(selectDiv) {
 
             var $this = $(selectDiv),
@@ -157,8 +157,8 @@
                     e.preventDefault()
                 }
             }, 0);
-        });   
-        
+        });
+
         $(document).on('click','[data--confirmation="true"]',function(e){
             e.preventDefault();
             var form = $(this).attr('data--submit');
@@ -186,7 +186,7 @@
             buttons: {
                 yes: {
                     action: function () {
-                        
+
                         if(ajaxtype == 'true') {
                             let url = _this;
 
@@ -302,7 +302,7 @@
         getNotificationCounts();
 
         setInterval(getNotificationCounts, 600000);
-        
+
         function setNotification(count){
             if(Number(count) >= 100){
                 $('.notify_count').text('99+');
@@ -401,7 +401,7 @@
         function isAttachments(filename) {
             var ext = getExtension(filename);
             var validExtensions = ['jpg', 'pdf', 'jpeg', 'gif', 'png', 'mp4', 'avi'];
-            
+
             if (jQuery.inArray(ext.toLowerCase(), validExtensions) !== -1) {
                 return true;
             }
@@ -410,7 +410,7 @@
 
     @if(isset($assets) && in_array('phone', $assets))
         $(document).ready(function(){
-            var input = document.querySelector("#phone"), 
+            var input = document.querySelector("#phone"),
                 errorMsg = document.querySelector("#error-msg"),
                 validMsg = document.querySelector("#valid-msg");
 
@@ -474,13 +474,13 @@
                 }
             }
 
-            
+
         });
     @endif
 
     @if(isset($assets) && in_array('maps', $assets))
         $(document).ready(function() {
-            
+
             var map; // Global declaration of the map
             var drawingManager;
             var last_latlong = null;
@@ -493,7 +493,7 @@
                     center: myLatlng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 }
-                
+
                 map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
                 drawingManager = new google.maps.drawing.DrawingManager({
                     drawingMode: google.maps.drawing.OverlayType.POLYGON,
@@ -502,14 +502,14 @@
                         position: google.maps.ControlPosition.TOP_CENTER,
                         drawingModes: [google.maps.drawing.OverlayType.POLYGON]
                     },
-                    
+
                     polygonOptions: {
                         editable: true
                     }
                 });
-                
+
                 drawingManager.setMap(map);
-            }             
+            }
             if(window.google || window.google.maps) {
                 initialize();
             }
@@ -527,7 +527,7 @@
                 if ( last_latlong ) {
                     last_latlong.setMap(null);
                 }
-                
+
                 $('#coordinates').val(event.overlay.getPath().getArray());
                 last_latlong = event.overlay;
                 auto_grow();

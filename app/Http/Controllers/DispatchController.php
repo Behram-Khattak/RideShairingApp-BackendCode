@@ -15,6 +15,7 @@ use App\Models\Notification;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\RideRequestHistory;
+use Illuminate\Support\Facades\Queue;
 
 class DispatchController extends Controller
 {
@@ -98,7 +99,7 @@ class DispatchController extends Controller
 
         if( request()->has('driver_id') && request('driver_id') != null ) {
             $data['riderequest_in_driver_id'] = $data['driver_id'];
-            $data['driver_id'] = $data['driver_id'];
+            $data['driver_id'] = request('driver_id');
             $data['riderequest_in_datetime'] = $data['datetime'];
 
             // unset($data['driver_id']);
@@ -168,7 +169,7 @@ class DispatchController extends Controller
                 $notify_data->success_type = $result->status;
                 $notify_data->success_message = __('message.ride.new_ride_requested');
                 $notify_data->result = new RideRequestResource($result);
-                dispatch(new NotifyViaMqtt('new_ride_request_'.$result->rider_id, json_encode($notify_data), $result->rider_id));
+               Queue::push(new NotifyViaMqtt('new_ride_request_'.$result->rider_id, json_encode($notify_data)));
             } else {
                 $history_data = [
                     'history_type'      => $result->status,
