@@ -8,8 +8,7 @@
         @endif
         <div class="row">
             <div class="col-12">
-                {{-- profile picture section --}}
-                {{-- <div class="col-12">
+                {{-- <div class="col-xl-3 col-lg-4">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
@@ -66,7 +65,6 @@
                         </div>
                     </div>
                 </div> --}}
-
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
@@ -76,7 +74,7 @@
                             <a href="{{route('driver.index')}}" class="btn btn-sm btn-primary" role="button">{{ __('message.back') }}</a>
                         </div>
                     </div>
-                    {{--  --}}
+                    {{-- Add Driver --}}
                     <div class="card-body">
                         <div class="driver-profile-info d-sm-flex d-block justify-content-between align-items-center border-bottom mb-5">
                             <div class="form-group">
@@ -100,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- driver verification inputs --}}
+                            {{-- Driver status --}}
                             <div class="form-group">
                                 <label class="form-label driver-status-label">{{ __('message.driver').' '.__('message.status') }}</label>
                                 <div class="row px-3">
@@ -137,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{--  --}}
+                        {{-- Driver Inforamtion --}}
                         <div class="new-user-info">
                             <div class="row">
                                 <div class="form-group col-md-6">
@@ -255,7 +253,8 @@
 
                                 <div class="form-group col-md-6">
                                     {{ Form::label('address',__('message.address'), ['class' => 'form-control-label']) }}
-                                    {{ Form::textarea('address', null, ['class'=>"form-control textarea" , 'rows'=>3  , 'placeholder'=> __('message.address') ]) }}
+                                    {{-- {{ Form::textarea('address', null, ['class'=>"form-control textarea" , 'rows'=>3  , 'placeholder'=> __('message.address') ]) }} --}}
+                                    {{ Form::text('address', old('address'), ['class' => 'form-control', 'placeholder' => __('message.address')]) }}
                                 </div>
                             </div>
                             <hr>

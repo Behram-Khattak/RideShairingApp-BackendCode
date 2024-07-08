@@ -19,7 +19,7 @@
                         <div class="new-user-info">
                             <div class="row">
                                 @if(auth()->user()->hasAnyRole(['admin','demo_admin']))
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-6">
                                         {{ Form::label('driver_id', __('message.select_name',[ 'select' => __('message.driver') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                         {{ Form::select('driver_id', isset($id) ? [ optional($data->driver)->id => optional($data->driver)->display_name] : [], old('driver_id'), [
                                             'class' => 'select2js form-group driver',
@@ -31,7 +31,7 @@
                                 @endif
 
                                 @if(auth()->user()->hasRole('fleet'))
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-6">
                                         {{ Form::label('driver_id', __('message.select_name',[ 'select' => __('message.driver') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                         {{ Form::select('driver_id', isset($id) ? [ optional($data->driver)->id => optional($data->driver)->display_name] : [], old('driver_id'), [
                                             'class' => 'select2js form-group driver',
@@ -47,7 +47,7 @@
                                     $has_expiry_date = isset($id) && optional($data->document)->has_expiry_date == 1 ? 1 : '';
                                 @endphp
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     {{ Form::label('document_id', __('message.select_name',[ 'select' => __('message.document') ]).' <span class="text-danger">* </span>',['class' => 'form-control-label' ],false) }}
                                     {{ Form::select('document_id', isset($id) ? [optional($data->document)->id => optional($data->document)->name." ".$is_required] : [], old('document_id'), [
                                             'class' => 'select2js form-group document_id',
@@ -59,19 +59,19 @@
                                     }}
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label class="form-control-label" for="expire_date">{{ __('message.expire_date') }} <span class="text-danger" id="has_expiry_date">{{ $has_expiry_date == 1 ? '*' : ''  }}</span> </label>
                                     {{ Form::text('expire_date', old('expire_date'),[ 'class' =>'form-control min-datepicker', 'placeholder' => __('message.expire_date'), 'required' => $has_expiry_date == 1 ? 'required' : null ]) }}
                                 </div>
-                                
+
                                 @if(auth()->user()->hasAnyRole(['admin','demo_admin']))
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-6">
                                         {{ Form::label('is_verified', __('message.is_verify').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                         {{ Form::select('is_verified',[ '0' => __('message.pending'), '1' => __('message.approved'), '2' => __('message.rejected') ], old('is_verified'), [ 'id' => 'is_verified', 'class' => 'form-control select2js', 'required']) }}
                                     </div>
                                 @endif
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label class="form-control-label" for="driver_document">{{ __('message.upload_document') }} <span class="text-danger" id="document_required"></span> </label>
                                     <div class="custom-file">
                                         <input type="file" id="driver_document" name="driver_document" class="custom-file-input" >
@@ -84,10 +84,10 @@
                                         <?php
                                             $file_extention = config('constant.IMAGE_EXTENTIONS');
                                             $image = getSingleMedia($data,'driver_document');
-                                            
+
                                             $extention = in_array(strtolower(imageExtention($image)),$file_extention);
                                         ?>
-                                            @if($extention)   
+                                            @if($extention)
                                                 <img id="driver_document_preview" src="{{ $image }}" alt="#" class="attachment-image mt-1" >
                                             @else
                                                 <img id="driver_document_preview" src="{{ asset('images/file.png') }}" class="attachment-file">
@@ -118,7 +118,7 @@
         <script type="text/javascript">
             (function($) {
                 "use strict";
-                    $(document).ready(function(){ 
+                    $(document).ready(function(){
                         $(document).on('change' , '#document_id' , function (){
                             var data = $('#document_id').select2('data')[0];
 

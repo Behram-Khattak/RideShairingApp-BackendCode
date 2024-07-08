@@ -19,17 +19,17 @@
                         <div class="new-user-info">
                             <div class="row">
                                 {{ Form::hidden('coordinates', old('coordinates'), [ 'id' => 'coordinates', 'class' =>'form-control','required' ] ) }}
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     {{ Form::label('name',__('message.name').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                     {{ Form::text('name',old('name'),['placeholder' => __('message.name'),'class' =>'form-control','required']) }}
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     {{ Form::label('distance_unit',__('message.distance_unit').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                     {{ Form::select('distance_unit',[ 'km' => __('message.km') ,'mile' => __('message.mile') ], old('distance_unit') ,[ 'class' =>'form-control select2js','required']) }}
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     {{ Form::label('timezone', __('message.timezone'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('timezone', [], old('timezone') , [
                                         'data-ajax--url' => route('ajax-list', [ 'type' => 'timezone' ]),
@@ -39,12 +39,12 @@
                                     }}
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     {{ Form::label('status',__('message.status').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                     {{ Form::select('status',[ '1' => __('message.active') ,'0' => __('message.inactive') ], old('status'), [ 'class' =>'form-control select2js','required']) }}
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-4">
                                 <div class="col-md-4">
                                     <img class="w-100" src="{{asset('images/region.gif')}}" alt="">
                                     <p><i class="far fa-hand-paper"></i> {{ __('message.drag_map_area') }} </p>
