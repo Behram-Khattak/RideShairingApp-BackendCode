@@ -10,12 +10,15 @@ class RiderDashboardResource extends JsonResource
 {
     public function toArray($request)
     {
+        
         $ride_request = $this->riderRideRequestDetail()->where('is_schedule', 0)->where('driver_id', null)->whereNotIn('status', ['canceled','completed'])->where('is_rider_rated', false)->first();
-        $on_ride_request = $this->riderRideRequestDetail()->where('driver_id', '!=', null)->whereNotIn('status', ['canceled'])->where('is_rider_rated',false)
-                        // ->whereHas('payment',function ($q) {
-                        //     $q->where('payment_status', 'pending');
-                        // })
-                        ->first();
+        // $on_ride_request = $this->riderRideRequestDetail()->first();
+        $on_ride_request = $this->riderRideRequestDetail()
+        ->where('rider_id', $this->id) // Assuming $this->id is the current rider's ID
+        ->whereNotIn('status', ['canceled'])
+        // ->where('is_rider_rated', false)
+        //  ->whereNotNull('driver_id')
+        ->first();
 
         // Log::debug('on_ride_request_info-'.$on_ride_request);
         // Log::debug('ride_request_info-'.$ride_request);

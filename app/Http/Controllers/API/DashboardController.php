@@ -101,8 +101,10 @@ class DashboardController extends Controller
         $response = null;
 
         if($user->hasRole('driver')) {
+            //  return "driver";
             $response = new DriverDashboardResource($user);
         } else {
+            // return " not driver";
             $response = new RiderDashboardResource($user);
         }
         return json_custom_response($response);
